@@ -5,6 +5,10 @@ export { default as Signup } from "./Auth/Signup";
 export { default as Callback } from "./Auth/Callback";
 export { default as Find } from "./Auth/Find";
 
+export { default as IssueCreate } from "./Issue/IssueCreate";
+export { default as IssueDetail } from "./Issue/IssueDetail";
+export { default as IssueUpdate } from "./Issue/IssueUpdate";
+
 export { default as Profile } from "./Profile/Profile";
 export { default as ProfileIssueUp } from "./Profile/ProfileIssueUp";
 export { default as ProfileIssueCreated } from "./Profile/ProfileIssueCreated";
