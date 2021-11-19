@@ -25,14 +25,13 @@ const issueSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    issueDate: { //작성일
+    issueCreatedDate: { //작성일
         type: Date,
         default: Date.now(),
         required: true
     },
     issueModifiedDate: { //수정일
         type: Date,
-        default: Date.now(),
         required: true
     },
     ups: { //업한 유저

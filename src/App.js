@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import {
     Home,
     Login, Signup, Find, Callback,
@@ -8,24 +8,26 @@ import {
 } from "./pages";
 
 const App = () => {
-  return (
-      <Switch>
-          <Route path="/auth/callback/" component={Callback}/>
-          <Route path="/auth/login/" component={Login} />
-          <Route path="/auth/signup/" component={Signup} />
-          <Route path="/auth/find/" component={Find} />
+    return (
+        <div>
+            <Routes>
+                <Route path="/auth/callback/" element={<Callback />}/>
+                <Route path="/auth/login/" element={<Login />} />
+                <Route path="/auth/signup/" element={<Signup />} />
+                <Route path="/auth/find/" element={<Find />} />
 
-          <Route path="/profile/issue/created/" component={ProfileIssueCreated} />
-          <Route path="/profile/issue/draft/" component={ProfileIssueDraft} />
-          <Route path="/profile/issue/up/" component={ProfileIssueUp} />
-          <Route path="/profile/withdrawal/" component={Withdrawal} />
-          <Route path="/profile/" component={Profile} />
+                <Route path="/profile/issue/created/" element={<ProfileIssueCreated />} />
+                <Route path="/profile/issue/draft/" element={<ProfileIssueDraft />} />
+                <Route path="/profile/issue/up/" element={<ProfileIssueUp />} />
+                <Route path="/profile/withdrawal/" element={<Withdrawal />} />
+                <Route path="/profile/" element={<Profile />} />
 
-          <Route path="/search/" component={Search} />
+                <Route path="/search/" element={<Search />} />
 
-          <Route path="/" component={Home} />
-      </Switch>
-  );
+                <Route path="/" element={<Home />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
