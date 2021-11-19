@@ -1,9 +1,11 @@
+
 import React, {useEffect, useState} from "react";
 import {categories, Header, IssueSingle} from "../Common";
 import {IssueRanking} from "./components";
 import {getApi} from "../../services/api";
 import {NavLink} from "react-router-dom";
 import {getCategoryEmoji} from "../../utils/Utils";
+
 
 const Home = () => {
     const categoryArray = categories;
@@ -67,7 +69,9 @@ const Home = () => {
                 )}
             </div>
         </>
+
     )
 }
+
 
 export default Home;

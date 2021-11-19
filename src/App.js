@@ -6,6 +6,7 @@ import {
     IssueDetail, IssueCreate,
     Profile, ProfileIssueCreated, ProfileIssueDraft, ProfileIssueUp, Withdrawal,
     Search, IssueUpdate,
+
 } from "./pages";
 
 const App = () => {
