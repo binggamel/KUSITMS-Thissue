@@ -1,0 +1,127 @@
+.background{
+    background: #E5E5E5;
+}
+
+.menubar{
+    position: absolute;
+    width: 1440px;
+    height: 100px;
+    left: 0px;
+    top: 0px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.issueUp.txtUp{
+    /* 이슈 업!로드 */
+    position: absolute;
+    width: 134px;
+    height: 32px;
+    left: 63px;
+    top: 37px;
+    
+    font-family: Rajdhani;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 32px;
+    /* identical to box height */
+    
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.issueUp{
+    /* Rectangle 280 */
+    position: absolute;
+    width: 194px;
+    height: 50px;
+    left: 33px;
+    top: 25px;
+
+    background: #F78EB6;
+    border-radius: 25px;
+}
+
+.main{
+    /* THISSUE */
+    position: absolute;
+    width: 169px;
+    height: 46px;
+    left: 650px;
+    top: 29px;
+
+    font-family: Rajdhani;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 45px;
+    text-align: center;
+    color: #5DDADB;
+}
+
+.input{
+    /* Rectangle 281 */
+    position: absolute;
+    width: 331px;
+    height: 50px;
+    left: 880px;
+    top: 23px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
+.search{
+    /* search */
+    position: absolute;
+    width: 25px;
+    height: 26px;
+    left: 1171px;
+    top: 39px;
+}
+
+.login.txtLog{
+    /* Login */
+    position: absolute;
+    width: 75px;
+    height: 38px;
+    left: 1296px;
+    top: 31px;
+
+    font-family: Rajdhani;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 38px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.login{
+    /* Rectangle 277 */
+    position: absolute;
+    width: 157px;
+    height: 50px;
+    left: 1257px;
+    top: 25px;
+    background: #5DDADB;
+    border-radius: 25px;
+}
+
+.txtRanking{
+    /* 실시간 이슈 랭킹🔥 */
+    position: absolute;
+    width: 450px;
+    height: 74px;
+    left: 33px;
+    top: 141px;
+
+    font-family: Sarala;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 82px;
+
+    color: #000000;
+}
