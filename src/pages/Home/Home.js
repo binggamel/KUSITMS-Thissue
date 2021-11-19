@@ -42,7 +42,7 @@ const Home = () => {
     }
 
     return (
-        <>
+        <> 
             <Header/>
             <IssueRanking/>
             <div className="home-category-wrap">
@@ -66,8 +66,7 @@ const Home = () => {
                             upNums={issue.issueUps.length}
                         />
                     </NavLink>
-                )
-                }
+                )}
             {/* </div>
         </>
                 <div className="background">
