@@ -1,41 +1,32 @@
 const express = require("express");
 const app = express();
 const basic = require("./router/index");
-const cookieParser = require('cookie-parser')
-const mongoose = require('mongoose');
+
+const mongoose = require("mongoose");
+require("dotenv").config();
 const config = require("./config/key");
 
-const { auth } = require('./middleware/auth');
-const { User } = require('./model/User');
+console.log(process.env.MONGO_URL);
 
-const connect = mongoose.connect(config.mongoURI,
-    {
-    useNewUrlParser: true, useUnifiedTopology: true,
-    //useCreateIndex: true, useFindAndModify: false
-    })
-    .then(() => console.log('MongoDB Connected...'))
-    .catch(err => console.log(err));
+//config.mongoURI
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    //   useCreateIndex: true,
+    //   useFindAndModify: false,
+});
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
+var db = mongoose.connection;
+// console.log(db);
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+    console.log("Database connected!!");
+});
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-    });
-}
-
-
-//Middleware
-app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cookieParser());
-app.use('/up', require('../server/router/up'));
-
-
-
-app.get('/', (req, res) => {
-    res.send('Home');
-})
+app.use(express.urlencoded({ extended: false }));
+// app.use(express.static(path.join(__dirname, "public")));
+app.use('/up', require('./router/up'));
 
 
 //Sign Up
@@ -102,8 +93,20 @@ app.get('/logout', auth, (req, res)=> {
         })
 })
 
-const port = process.env.PORT || 5000
+app.get("/", (req, res) => res.send("핫식스 아좌아좌빠이띵~"));
+
+app.use("/api", require("./api"));
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+
+    app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+    });
+}
+
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-console.log(`Server Listening on ${port}`)
+    console.log(`Server Listening on ${port}`);
 });
