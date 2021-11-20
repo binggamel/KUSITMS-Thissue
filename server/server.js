@@ -6,10 +6,11 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const config = require("./config/key");
 
-console.log(process.env.MONGO_URL);
+const { auth } = require("./middleware/auth");
+const { User } = require("./model/User");
 
 //config.mongoURI
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     //   useCreateIndex: true,

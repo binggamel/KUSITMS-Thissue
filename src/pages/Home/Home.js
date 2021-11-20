@@ -1,4 +1,3 @@
-
 import React, {useEffect, useState} from "react";
 import {categories, Header, IssueSingle} from "../Common";
 import {IssueRanking} from "./components";
@@ -19,7 +18,6 @@ const Home = () => {
         // const data = await getApi("issue/");
         // setIssues(data.results);
 
-        // 서버 연결 후 아래 코드는 삭제
         const issueTest = [
             {
                 issueId: 1,

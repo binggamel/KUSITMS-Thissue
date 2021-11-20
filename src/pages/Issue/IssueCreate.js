@@ -3,7 +3,7 @@ import {Header} from "../Common";
 import {Route, Routes} from "react-router-dom";
 import {IssueCreateCategory, IssueCreateContents, IssueCreateTitle} from "./components";
 import {postApi} from "../../services/api";
-import '../Issue/styles.IssueCreate.scss';
+import '../../styles/IssueCreate.scss';
 
 const IssueCreate = () => {
     const [title, setTitle] = useState("");
@@ -18,15 +18,16 @@ const IssueCreate = () => {
     }, [isNextStep]);
 
     const createIssue = async (issueTitle, issueContents, issueHashtag, issueCategory, issueAuthor, active) => {
-        // await postApi(
-        //     "issue/",
-        //     {issueTitle, issueContents, issueHashtag, issueCategory, issueAuthor, active});
-        console.log("최종으로 보내는 것!")
-        console.log(`제목: ${issueTitle}`);
-        console.log(`해시태그: ${issueHashtag}`);
-        console.log(`내용: ${issueContents}`);
-        console.log(`카테고리: ${issueCategory}`);
-        console.log(active);
+        await postApi(
+            "issue/",
+            {issueTitle, issueContents, issueHashtag, issueCategory, issueAuthor, active});
+
+        // console.log("최종으로 보내는 것!")
+        // console.log(`제목: ${issueTitle}`);
+        // console.log(`해시태그: ${issueHashtag}`);
+        // console.log(`내용: ${issueContents}`);
+        // console.log(`카테고리: ${issueCategory}`);
+        // console.log(active);
         setTitle("");
         setContents("");
         setHashtag("");
