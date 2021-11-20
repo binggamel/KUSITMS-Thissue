@@ -3,6 +3,7 @@ import {Header} from "../Common";
 import {Route, Routes} from "react-router-dom";
 import {IssueCreateCategory, IssueCreateContents, IssueCreateTitle} from "./components";
 import {postApi} from "../../services/api";
+import '../Issue/styles.IssueCreate.scss';
 
 const IssueCreate = () => {
     const [title, setTitle] = useState("");
