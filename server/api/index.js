@@ -4,5 +4,7 @@
 const { Router } = require("express");
 const router = Router();
 
-router.use("/issue", require("./issue/index"));
+router.use("/issue", require("./issue"));
+router.use("/user", require("./user"));
+
 module.exports = router;
