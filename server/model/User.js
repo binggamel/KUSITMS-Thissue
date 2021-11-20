@@ -21,7 +21,6 @@ const userSchema = mongoose.Schema({
     },
     birthday: {
         type: Date,
-        default: Date.now(),
     },
     sex: {
         type: String,
@@ -37,9 +36,6 @@ const userSchema = mongoose.Schema({
     token: { //유효성 관리
         type: String
     },
-    tokenExp: { //유효기간
-        type: Number
-    }
 })
 
 //유저 모델을 저장하기 전에 비밀번호 암호화
@@ -72,7 +68,6 @@ userSchema.methods.generateToken = function(cb){
 
     //생성한 Token을 User에 넣음
     user.token=token;
-    user.tokenExp=oneHour;
     user.save(function(err, user){
         if(err) return cb(err)
         cb(null, user)

@@ -1,15 +1,17 @@
 const express = require("express");
 const app = express();
 const basic = require("./router/index");
-
+const cookieParser = require('cookie-parser');
 const mongoose = require("mongoose");
 require("dotenv").config();
 const config = require("./config/key");
+const { auth } = require("./middleware/auth");
+const { User } = require("./model/User");
 
 console.log(process.env.MONGO_URL);
 
 //config.mongoURI
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     //   useCreateIndex: true,
@@ -27,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, "public")));
 app.use('/up', require('./router/up'));
-
+app.use(cookieParser());
 
 //Sign Up
 app.post('/signup', (req, res) => {
@@ -83,6 +85,7 @@ app.get('/auth', auth, (req, res)=>{
 
 //Logout
 app.get('/logout', auth, (req, res)=> {
+    //로그아웃하려는 유저를 DB에서 찾아서
     User.findOneAndUpdate({ _id: req.user._id},
         {token: ""}
         ,(err, user)=> {
@@ -93,7 +96,7 @@ app.get('/logout', auth, (req, res)=> {
         })
 })
 
-app.get("/", (req, res) => res.send("핫식스 아좌아좌빠이띵~"));
+
 
 app.use("/api", require("./api"));
 
@@ -110,3 +113,5 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server Listening on ${port}`);
 });
+
+

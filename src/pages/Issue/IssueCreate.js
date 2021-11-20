@@ -3,7 +3,7 @@ import {Header} from "../Common";
 import {Route, Routes} from "react-router-dom";
 import {IssueCreateCategory, IssueCreateContents, IssueCreateTitle} from "./components";
 import {postApi} from "../../services/api";
-import '../Issue/styles.IssueCreate.scss';
+import '../../styles/IssueCreate.scss';
 
 const IssueCreate = () => {
     const [title, setTitle] = useState("");
@@ -51,30 +51,30 @@ const IssueCreate = () => {
             <div className="issueCreate-wrap">
                 <Routes>
                     <Route path={`title/`}
-                           element={<IssueCreateTitle
-                               title={title}
-                               setTitle={setTitle}
-                               setIsNextStep={setIsNextStep}
-                           />}/>
-                    <Route path="contents/"
-                           element={<IssueCreateContents
-                               contents={contents}
-                               setContents={setContents}
-                               hashtag={hashtag}
-                               setHashtag={setHashtag}
-                               setIsNextStep={setIsNextStep}
-                           />}/>
-                    <Route path="category/"
-                           element={<IssueCreateCategory
-                               title={title}
-                               contents={contents}
-                               hashtag={hashtag}
-                               category={category}
-                               setCategory={setCategory}
-                               authInfo={authInfo}
-                               setIsNextStep={setIsNextStep}
-                               createIssue={createIssue}
-                           />}/>
+                        element={<IssueCreateTitle
+                            title={title}
+                            setTitle={setTitle}
+                            setIsNextStep={setIsNextStep}
+                        />}/>
+                <Route path="contents/"
+                        element={<IssueCreateContents
+                            contents={contents}
+                            setContents={setContents}
+                            hashtag={hashtag}
+                            setHashtag={setHashtag}
+                            setIsNextStep={setIsNextStep}
+                        />}/>
+                <Route path="category/"
+                        element={<IssueCreateCategory
+                            title={title}
+                            contents={contents}
+                            hashtag={hashtag}
+                            category={category}
+                            setCategory={setCategory}
+                            authInfo={authInfo}
+                            setIsNextStep={setIsNextStep}
+                            createIssue={createIssue}
+                        />}/>
                 </Routes>
             </div>
         </>
