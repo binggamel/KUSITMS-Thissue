@@ -19,12 +19,36 @@ const issueSchema = new mongoose.Schema({
     required: true,
   },
   issueHashtag: {
-    //해시태그
-    type: String,
+    _1: {
+      type: String,
+      default: "",
+    },
+
+    _2: {
+      type: String,
+      default: "",
+    },
+
+    _3: {
+      type: String,
+      default: "",
+    },
+
+    _4: {
+      type: String,
+      default: "",
+    },
+
+    _5: {
+      type: String,
+      default: "",
+    },
   },
+
   issueCategory: {
-    //카테고리
-    type: String,
+    required: true,
+    type: Number,
+    enum: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   },
   issueAuthor: {
     //작성자

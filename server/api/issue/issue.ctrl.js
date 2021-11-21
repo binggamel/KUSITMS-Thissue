@@ -61,6 +61,8 @@ const create = (req, res) => {
     issueViewCnt,
   } = req.body;
 
+  // console.log(req.user);
+
   //=================한국시간 처리=================
   function getCurrentDate() {
     var date = new Date();
