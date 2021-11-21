@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {categories, Header, IssueSingle} from "../Common";
+import {Route, Routes} from "react-router-dom";
+import {categories, Header} from "../Common";
 import {IssueRanking} from "./components";
 import {getApi} from "../../services/api";
 import {NavLink} from "react-router-dom";
 import {getCategoryEmoji} from "../../utils/Utils";
+import HomeCategoryScreening from "./components/HomeCategoryScreening";
 
 
 const Home = () => {
@@ -39,35 +41,41 @@ const Home = () => {
         setIssues(issueTest);
     }
 
+    const getCategoryIssue = (category) => {
+        return issues.filter(issue => issue.issueCategory === category);
+    }
+
     return (
         <>
             <Header/>
             <IssueRanking/>
             <div className="home-category-wrap">
+                <NavLink to="/" className="home-category">전체</NavLink>
                 {categoryArray.map(category =>
-                    <div className="home-category">{category.emoji}{category.koreanName}</div>
+                    <NavLink to={`/${category.englishName}/`}
+                             className="home-category">
+                        {category.emoji}{category.koreanName}
+                    </NavLink>
                 )}
             </div>
             <div className="home-sort-wrap">
                 <div className="home-sort">⏰최신순</div>
             </div>
             <div className="home-issue-wrap">
-                {issues.map(issue =>
-                    <NavLink to={`/issue/${issue.issueId}/`}>
-                        <IssueSingle
-                            key={issue.issueId}
-                            id={issue.issueId}
-                            title={issue.issueTitle}
-                            emoji={getCategoryEmoji(issue.issueCategory)}
-                            hashtag={issue.issueHashtag}
-                            date={issue.issueDate}
-                            upNums={issue.issueUps.length}
-                        />
-                    </NavLink>
-                )}
+                <Routes>
+                    <Route path="/"
+                           element={<HomeCategoryScreening
+                               issues={issues}
+                           />}/>
+                    {categoryArray.map(category =>
+                        <Route path={`${category.englishName}/`}
+                               element={<HomeCategoryScreening
+                                   issues={getCategoryIssue(category.englishName)}
+                               />}/>
+                    )}
+                </Routes>
             </div>
         </>
-
     )
 }
 

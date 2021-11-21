@@ -51,7 +51,7 @@ const IssueCreate = () => {
             </button>
             <div className="issueCreate-wrap">
                 <Routes>
-                    <Route path={`title/`}
+                    <Route path="title/"
                            element={<IssueCreateTitle
                                title={title}
                                setTitle={setTitle}
