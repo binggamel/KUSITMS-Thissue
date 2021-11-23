@@ -6,7 +6,7 @@ import {getCategoryEmoji} from "../../../utils/Utils";
 const HomeCategoryScreening = (props) => {
     return (
         <>
-            {props.issues.slice(0, props.itemList.length-1).map(issue =>
+            {props.issues.slice(0, props.itemNums-1).map(issue =>
                 <NavLink to={`/issue/${issue.issueId}/`}>
                     <IssueSingle
                         key={issue.issueId}
@@ -19,7 +19,7 @@ const HomeCategoryScreening = (props) => {
                     />
                 </NavLink>
             )}
-            {props.itemList.length < props.issues.length &&
+            {props.itemNums < props.issues.length &&
                 <div ref={props.setTarget}>
                     {props.isLoaded && "Loading..."}
                 </div>
