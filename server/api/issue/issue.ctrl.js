@@ -1,4 +1,7 @@
-const IssueModel = require("../../model/Issue");
+const { Issue } = require("../../model/Issue");
+const { RankingIssue } = require("../../model/Ranking");
+const { User } = require("../../model/User");
+
 const mongoose = require("mongoose");
 
 //유효한 id인지 체크 function
@@ -15,14 +18,13 @@ const checkId = (req, res, next) => {
 const list = (req, res) => {
   const limit = parseInt(req.query.limit || 10, 10);
   if (Number.isNaN(limit)) return res.status(400).end();
-  console.log("list 조회 : " + req.params.id);
+  // console.log("list 조회 : " + req.params.id);
 
-  IssueModel.issueCollection
-    .find((err, result) => {
-      if (err) return res.status(500).end();
-      console.log(result);
-      //   res.render("issue/list", { result });
-    })
+  Issue.find((err, result) => {
+    if (err) return res.status(500).end();
+    // console.log(result);
+    //   res.render("issue/list", { result });
+  })
     .limit(limit)
     .sort({ _id: -1 }); //최신순
 };
@@ -31,7 +33,7 @@ const list = (req, res) => {
 const detail = (req, res) => {
   const id = req.params.id;
   //id로 조회
-  IssueModel.issueCollection.findById(id, (err, result) => {
+  Issue.findById(id, (err, result) => {
     if (err) return res.status(500).end();
     if (!result) return res.status(404).end();
 
@@ -41,7 +43,7 @@ const detail = (req, res) => {
     result.issueViewCnt++;
     result.save();
     // res.render("issue/detail", { result });
-  });
+  }).populate(["ups.user"]);
 };
 
 //등록 (POST localhost:5000/api/issue)
@@ -50,56 +52,105 @@ const detail = (req, res) => {
 // - 실패 : 값 누락시 (400 : Bad Request)
 const create = (req, res) => {
   // ups(업한 유저) 아직 안함!!
-  const {
-    // issueId,
-    issueTitle,
-    issueContents,
-    issueHashtag,
-    issueCategory,
-    issueAuthor,
-    active,
-    issueViewCnt,
-  } = req.body;
-
-  //=================한국시간 처리=================
-  function getCurrentDate() {
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth();
-    var today = date.getDate();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    var milliseconds = date.getMilliseconds();
-    return new Date(
-      Date.UTC(year, month, today, hours, minutes, seconds, milliseconds)
-    );
-  }
-
-  const issueDate = getCurrentDate();
-  const issueModifiedDate = getCurrentDate();
-  //   필수 data 누락시 오류 처리 (400 : Bad Request)
-  if (!issueTitle || !issueContents) return res.status(400).end();
-
-  //   id(db에서 자동 부여되는)값 자동 채번
-  IssueModel.issueCollection.create(
-    {
-      //   issueId,
+  User.findOne({ token: req.cookies.x_auth }, (err, result) => {
+    const {
+      // issueId,
       issueTitle,
       issueContents,
       issueHashtag,
       issueCategory,
-      issueAuthor,
-      issueDate,
-      issueModifiedDate,
       active,
       issueViewCnt,
-    },
-    (err, result) => {
-      if (err) return res.status(500).end();
-      res.status(201).json(result);
+    } = req.body;
+
+    const _id = result.id;
+    const author = result.name;
+    const issueAuthor = { _id, author };
+
+    //=================한국시간 처리=================
+    function getCurrentDate() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth();
+      var today = date.getDate();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      return new Date(Date.UTC(year, month, today, hours, minutes, seconds));
     }
-  );
+
+    const issueDate = getCurrentDate();
+    const issueModifiedDate = getCurrentDate();
+    //   필수 data 누락시 오류 처리 (400 : Bad Request)
+    if (!issueTitle || !issueContents) return res.status(400).end();
+
+    //   id(db에서 자동 부여되는)값 자동 채번
+    Issue.create(
+      {
+        //   issueId,
+        issueTitle,
+        issueContents,
+        issueHashtag,
+        issueCategory,
+        issueAuthor,
+        issueViewCnt,
+        issueDate,
+        issueModifiedDate,
+        active,
+      },
+      (err, result) => {
+        if (err) return res.status(500).end();
+        res.status(201).json(result);
+        const id = result.id;
+        RankingIssue.create({ id }, (err, result) => {
+          if (err) return res.status(500).send("랭킹 업로드 시 오류 발생");
+        });
+      }
+    );
+  });
+};
+
+//ups생성 (post localhost:5000/api/issue/:id/ups)
+// ups 유저값 추가
+// req.cookies.x_auth
+const createUps = (req, res) => {
+  User.findOne({ token: req.cookies.x_auth }, (err, result) => {
+    // var _id = result.id;
+    var newUps = eval({ user: "", createAt: "" });
+    console.log(newUps);
+
+    newUps.user = result.id;
+
+    console.log(newUps.user);
+    //=================한국시간 처리=================
+    function getCurrentDate() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth();
+      var today = date.getDate();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      return new Date(Date.UTC(year, month, today, hours, minutes, seconds));
+    }
+
+    newUps.createAt = getCurrentDate();
+
+    console.log(newUps);
+
+    var issueId = req.params.id;
+    //{ $push: { ups: { newUps } } },
+    Issue.findByIdAndUpdate(
+      issueId,
+      { $push: { ups: [newUps] } },
+      { new: true },
+      (err, result) => {
+        if (err) return res.status(500).send("ups 시 오류가 발생했습니다!");
+        console.log(result);
+        res.status(201).json(result);
+      }
+    );
+  });
 };
 
 //수정 (PUT localhost:5000/api/issue/:id)
@@ -121,10 +172,7 @@ const update = (req, res) => {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
-    var milliseconds = date.getMilliseconds();
-    return new Date(
-      Date.UTC(year, month, today, hours, minutes, seconds, milliseconds)
-    );
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds));
   }
 
   const issueModifiedDate = getCurrentDate();
@@ -135,7 +183,7 @@ const update = (req, res) => {
   }
 
   //id에 해당하는 Document에 입력받은 Data로 Update
-  IssueModel.issueCollection.findByIdAndUpdate(
+  Issue.findByIdAndUpdate(
     id,
     {
       issueTitle,
@@ -159,11 +207,35 @@ const remove = (req, res) => {
   const id = req.params.id;
 
   //id에 해당하는 Document를 찾아ㅏ서 DB에서 삭제
-  IssueModel.issueCollection.findByIdAndDelete(id, (err, result) => {
+  Issue.findByIdAndDelete(id, (err, result) => {
     if (err) return res.status(500).send("삭제 시 오류가 발생했습니다!");
     if (!result) return res.status(404).send("해당하는 정보가 없습니다.");
     res.json(result);
   });
+
+  RankingIssue.findOneAndDelete({ id: id }, (err, result) => {
+    if (err) return res.status(500).send("삭제 시 오류가 발생했습니다!");
+    if (!result) return res.status(404).send("해당하는 정보가 없습니다.");
+  });
+};
+
+const removeUps = (req, res) => {
+  const issueId = req.params.id;
+  const upId = req.params.upId;
+
+  //{ $push: { ups: [newUps] } }
+  Issue.findByIdAndUpdate(
+    issueId,
+    {
+      $pull: { ups: { _id: upId } },
+    },
+    { new: true },
+    (err, result) => {
+      if (err) return res.status(500).send("수정 시 오류가 발생했습니다!");
+      if (!result) return res.status(404).end("해당하는 정보가 없습니다!");
+      res.json(result);
+    }
+  );
 };
 
 //페이지 뿌리는 부분
@@ -175,7 +247,7 @@ const showCreatePage = (req, res) => {
 const showUpdatePage = (req, res) => {
   const id = req.params.id;
 
-  IssueModel.issueCollection.findById(id, (err, result) => {
+  Issue.findById(id, (err, result) => {
     if (err) return res.status(500).end();
     if (!result) return res.status(404).end();
     // res.render("issue/update", { result });
@@ -187,7 +259,9 @@ module.exports = {
   detail,
   create,
   update,
+  createUps,
   remove,
+  removeUps,
   checkId,
   showCreatePage,
   showUpdatePage,
