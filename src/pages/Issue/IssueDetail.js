@@ -3,10 +3,11 @@ import {Header} from "../Common";
 import {NavLink} from "react-router-dom";
 import Popup from "reactjs-popup";
 import {postApi} from "../../services/api";
+import {getCategoryEmoji} from "../../utils/Utils";
 
 const IssueDetail = ({match}) => {
     const [issue, setIssue] = useState({});
-    const [issues, setIssues] = useState({});
+    const [issues, setIssues] = useState([]);
     const [authInfo, setAuthInfo] = useState({});
     const [isUped, setIsUped] = useState(false);
 
@@ -25,28 +26,52 @@ const IssueDetail = ({match}) => {
             issueAuthor: "유저",
             issueTitle: "테스트제목1",
             issueContents: "어쩌구 저쩌구 얼레벌레",
-            issueCategory: "economy",
+            issueCategory: 0,
             issueHashtag: ["해시태그1", "해시태그2"],
             issueDate: "2020-10-20",
             issueModifiedDate: "2021-11-10",
             issueUps: ["사람1", "2", "3", "4", "5", "6", "7"]
         }
-        const user = "사1";
+        const user = "3";
+        const issuesTest = [
+            {
+                issueId: 3,
+                issueTitle: "테스트제목1",
+                issueCategory: 0,
+                issueHashtag: ["해시태그3", "해시태그4"],
+                issueDate: "2020-10-20",
+                issueUps: ["사람1"]
+            },
+            {
+                issueId: 4,
+                issueTitle: "테스트제목2",
+                issueCategory: 3,
+                issueHashtag: ["해시태그3", "해시태그4"],
+                issueDate: "2020-10-25",
+                issueUps: ["사람1", "사람2"]
+            },
+        ]
         setIssue(issueTest);
         setAuthInfo(user);
-        setIsUped((issue.issueUps || []).includes(authInfo));
+        // data.results.issueUps
+        setIsUped((issueTest.issueUps || []).includes(user));
+        setIssues(issuesTest);
     }
 
     const doUp = async () => {
         // await postApi
-        console.log("이슈 업")
-        setIsUped(!isUped);
+        console.log("이슈 업");
+        setIsUped(prev => !prev);
     }
 
     const undoUp = async () => {
         // await
-        console.log("이슈 업 취소")
-        setIsUped(!isUped);
+        console.log("이슈 업 취소");
+        setIsUped(prev => !prev);
+    }
+
+    const getSimilarIssues = (currentId, categoryId) => {
+        return issues.filter(issue => issue.issueCategory === categoryId && issue.issueId !== currentId).slice(0, 5);
     }
 
     return (
@@ -54,53 +79,62 @@ const IssueDetail = ({match}) => {
             <Header/>
             {!issue ? <div>로딩중...</div> :
                 <>
-                    <div className="issueDetail-hashtag-wrap">
-                        {(issue.issueHashtag || []).map(hashtag =>
-                            <NavLink to="" className="issueDetail-hashtag">#{hashtag}</NavLink>)}
-                    </div>
-                    <div className="issueDetail-title">{issue.issueTitle}</div>
-                    <div className="issueDetail-contents">{issue.issueContents}</div>
-                    <div className="issueDetail-footer">
-                        작성자 {issue.issueAuthor} | 작성일 {issue.issueDate} | 수정일: {issue.issueModifiedDate}
-                    </div>
+                    <div className="issueDetail-left">
+                        <div className="issueDetail-hashtag-wrap">
+                            {(issue.issueHashtag || []).map(hashtag =>
+                                <NavLink to="" className="issueDetail-hashtag">#{hashtag}</NavLink>)}
+                        </div>
+                        <div className="issueDetail-title">{issue.issueTitle}</div>
+                        <div className="issueDetail-contents">{issue.issueContents}</div>
+                        <div className="issueDetail-footer">
+                            작성자 {issue.issueAuthor} | 작성일 {issue.issueDate} | 수정일: {issue.issueModifiedDate}
+                        </div>
 
-                    <div className="issueDetail-bottom">
-                        <div className="issueDetail-bottom-left">
-                            {isUped ? <button onClick={() => undoUp()} style={{background: "blue"}}>🔥</button> :
-                                <button onClick={() => doUp()}>🔥</button>}
-                            <div>이슈 업!</div>
-                            <div>{(issue.issueUps || []).length}</div>
-                        </div>
-                        <div className="issueDetail-bottom-right">
-                            <div className="issueDetail-bottom-right-header">
-                                {((issue.issueUps || []).length > 5) ?
-                                    <div className="issueDetail-up-wrap">
-                                        <div className="issueDetail-bottom-title">업! 한 사람들</div>
-                                        {(issue.issueUps || []).slice(0, 4).map(up =>
-                                            <div className="issueDetail-up">{up}</div>)}
-                                        <Popup trigger={<div>+</div>} modal>
-                                            {close => (
-                                                <>
-                                                    <div className="close" onClick={() => close()}>X</div>
-                                                    업한 사람들
-                                                    {issue.issueUps.map(up =>
-                                                        <div className="issueDetail-up">{up}</div>)}
-                                                </>
-                                            )}
-                                        </Popup>
-                                    </div> :
-                                    <div className="issueDetail-up-wrap">
-                                        {(issue.issueUps || []).map(up =>
-                                            <div className="issueDetail-up">{up}</div>)}
-                                    </div>
-                                }
-                                <div className="issueDetail-share">공유</div>
+                        <div className="issueDetail-bottom">
+                            <div className="issueDetail-bottom-left">
+                                {isUped ? <button onClick={() => undoUp()} style={{background: "blue"}}>🔥</button> :
+                                    <button onClick={() => doUp()}>🔥</button>}
+                                <div>이슈 업!</div>
+                                <div>{(issue.issueUps || []).length}</div>
                             </div>
-                            <div className="issueDetailGraph">
-                                <div className="issueDetail-bottom-title">업! 사용자 통계</div>
-                                그래프가 들어갈 자리입니다.
+                            <div className="issueDetail-bottom-right">
+                                <div className="issueDetail-bottom-right-header">
+                                    {((issue.issueUps || []).length > 5) ?
+                                        <div className="issueDetail-up-wrap">
+                                            <div className="issueDetail-bottom-title">업! 한 사람들</div>
+                                            {(issue.issueUps || []).slice(0, 4).map(up =>
+                                                <div className="issueDetail-up">{up}</div>)}
+                                            <Popup trigger={<div>+</div>} modal>
+                                                {close => (
+                                                    <>
+                                                        <div className="close" onClick={() => close()}>X</div>
+                                                        업한 사람들
+                                                        {issue.issueUps.map(up =>
+                                                            <div className="issueDetail-up">{up}</div>)}
+                                                    </>
+                                                )}
+                                            </Popup>
+                                        </div> :
+                                        <div className="issueDetail-up-wrap">
+                                            {(issue.issueUps || []).map(up =>
+                                                <div className="issueDetail-up">{up}</div>)}
+                                        </div>
+                                    }
+                                    <div className="issueDetail-share">공유</div>
+                                </div>
+                                <div className="issueDetailGraph">
+                                    <div className="issueDetail-bottom-title">업! 사용자 통계</div>
+                                    그래프가 들어갈 자리입니다.
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="issueDetail-right">
+                        <div className="issueDetail-right-title">유사한 이슈도 함께 봐요!</div>
+                        {getSimilarIssues(issue.issueId, issue.issueCategory).map(similarIssue =>
+                            <NavLink
+                                to={`/issue/${similarIssue.issueId}`}>{getCategoryEmoji(similarIssue.issueCategory)} {similarIssue.issueTitle}</NavLink>)}
+                        <div className="issueDetail-right-title">이런 이슈는 어때요?</div>
                     </div>
                 </>
             }

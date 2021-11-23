@@ -30,7 +30,7 @@ export const postApi = async (url, data) => {
 
         // token 받고 아래 headers 코드는 삭제
         const headers = null;
-        await api.post(url, data, {"headers": true});
+        await api.post(url, data, {headers});
     } catch (err) {
         console.log(err);
         throw err;
