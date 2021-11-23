@@ -5,7 +5,6 @@ import {IssueRanking} from "./components";
 import {getApi} from "../../services/api";
 import {NavLink} from "react-router-dom";
 import HomeCategoryScreening from "./components/HomeCategoryScreening";
-import {parse} from "@fortawesome/fontawesome-svg-core";
 
 
 const Home = () => {

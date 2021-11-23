@@ -5,12 +5,16 @@ const IssueSingle = (props) => {
 
     return (
         <div className="ISSUESINGLE">
-            <div className="issuesingle-icon">{props.emoji}</div>
-            <div className="issuesingle-title">{props.title}</div>
-            <div className="issuesingle-hashtag">{hashtagArray.map(hashtag => `#${hashtag} `)}</div>
-            <div className="issuesingle-footer">
-                <div className="issuesingle-date">{props.date}</div>
-                <div className="issuesingle-upNums">{props.upNums}</div>
+            <div className="issueSingle-date">{props.date}</div>
+            <div className="issueSingle-icon">{props.emoji}</div>
+            <div className="issueSingle-title">{props.title}</div>
+            <div className="issueSingle-footer">
+                <div className="issueSingle-hashtag-warp">
+                    {hashtagArray.map(hashtag =>
+                        <div className="issueSingle-hashtag">{hashtag}</div>
+                    )}
+                </div>
+                <div className="issueSingle-upNums">{props.upNums}</div>
             </div>
         </div>
     )
