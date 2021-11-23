@@ -12,12 +12,11 @@ const Home = () => {
     const [issues, setIssues] = useState([]);
     const [target, setTarget] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [itemNums, setItemNums] = useState(window.localStorage.getItem("itemNumsBackup") ? JSON.parse(window.localStorage.getItem("itemNumsBackup")) : 10);
+    // const [itemNums, setItemNums] = useState(window.localStorage.getItem("itemNumsBackup") ? JSON.parse(window.localStorage.getItem("itemNumsBackup")) : 10);
+    const [itemNums, setItemNums] = useState(10);
 
     useEffect(() => {
         init();
-        console.log(`local: ${window.localStorage.getItem("itemNumsBackup")}`);
-        console.log(itemNums);
     }, [itemNums]);
 
     const init = async () => {
@@ -263,12 +262,12 @@ const Home = () => {
         setItemNums(prev => prev + 10);
         setIsLoaded(false);
 
-        const previousItemNumsBackup = JSON.parse(window.localStorage.getItem("itemNumsBackup"));
-        console.log(`예전 거: ${previousItemNumsBackup}`);
-        previousItemNumsBackup ?
-            window.localStorage.setItem("itemNumsBackup", JSON.stringify(previousItemNumsBackup + 10)) :
-            window.localStorage.setItem("itemNumsBackup", "20");
-        console.log(`함수 내 로컬: ${window.localStorage.getItem("itemNumsBackup")}`);
+        // const previousItemNumsBackup = JSON.parse(window.localStorage.getItem("itemNumsBackup"));
+        // console.log(`예전 거: ${previousItemNumsBackup}`);
+        // previousItemNumsBackup ?
+        //     window.localStorage.setItem("itemNumsBackup", JSON.stringify(previousItemNumsBackup + 10)) :
+        //     window.localStorage.setItem("itemNumsBackup", "20");
+        // console.log(`함수 내 로컬: ${window.localStorage.getItem("itemNumsBackup")}`);
     }
 
     const onIntersect = async ([entry], observer) => {
