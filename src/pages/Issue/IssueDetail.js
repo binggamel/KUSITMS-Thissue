@@ -6,6 +6,7 @@ import {postApi} from "../../services/api";
 
 const IssueDetail = ({match}) => {
     const [issue, setIssue] = useState({});
+    const [issues, setIssues] = useState({});
     const [authInfo, setAuthInfo] = useState({});
     const [isUped, setIsUped] = useState(false);
 

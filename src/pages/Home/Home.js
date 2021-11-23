@@ -27,227 +27,115 @@ const Home = () => {
             {
                 issueId: 1,
                 issueTitle: "테스트제목1",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
+                issueCategory: 0,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-20",
                 issueUps: ["사람1"]
             },
             {
                 issueId: 2,
                 issueTitle: "테스트제목2",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
+                issueCategory: 3,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-25",
                 issueUps: ["사람1", "사람2"]
             },
             {
                 issueId: 3,
                 issueTitle: "테스트제목3",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
+                issueCategory: 2,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-20",
                 issueUps: ["사람1"]
             },
             {
                 issueId: 4,
                 issueTitle: "테스트제목4",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
+                issueCategory: 1,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-25",
                 issueUps: ["사람1", "사람2"]
             },
             {
                 issueId: 5,
                 issueTitle: "테스트제목5",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
+                issueCategory: 0,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-20",
                 issueUps: ["사람1"]
             },
             {
                 issueId: 6,
                 issueTitle: "테스트제목6",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
+                issueCategory: 2,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-25",
                 issueUps: ["사람1", "사람2"]
             },
             {
                 issueId: 7,
                 issueTitle: "테스트제목7",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
+                issueCategory: 3,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-20",
                 issueUps: ["사람1"]
             },
             {
                 issueId: 8,
                 issueTitle: "테스트제목8",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
+                issueCategory: 11,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-25",
                 issueUps: ["사람1", "사람2"]
             },
             {
                 issueId: 9,
                 issueTitle: "테스트제목9",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
+                issueCategory: 12,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-20",
                 issueUps: ["사람1"]
             },
             {
                 issueId: 10,
                 issueTitle: "테스트제목10",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
+                issueCategory: 13,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-25",
                 issueUps: ["사람1", "사람2"]
             },
             {
                 issueId: 11,
                 issueTitle: "테스트제목11",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
+                issueCategory: 13,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-20",
                 issueUps: ["사람1"]
             },
             {
                 issueId: 12,
                 issueTitle: "테스트제목12",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
+                issueCategory: 11,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-25",
                 issueUps: ["사람1", "사람2"]
             },
             {
                 issueId: 13,
                 issueTitle: "테스트제목13",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
+                issueCategory: 7,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-20",
                 issueUps: ["사람1"]
             },
             {
                 issueId: 14,
                 issueTitle: "테스트제목14",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
+                issueCategory: 6,
+                issueHashtag: ["해시태그3", "해시태그4"],
                 issueDate: "2020-10-25",
                 issueUps: ["사람1", "사람2"]
             },
-            {
-                issueId: 1,
-                issueTitle: "테스트제목1",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 2,
-                issueTitle: "테스트제목2",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 3,
-                issueTitle: "테스트제목3",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 4,
-                issueTitle: "테스트제목4",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 5,
-                issueTitle: "테스트제목5",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 6,
-                issueTitle: "테스트제목6",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 7,
-                issueTitle: "테스트제목7",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 8,
-                issueTitle: "테스트제목8",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 9,
-                issueTitle: "테스트제목9",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 10,
-                issueTitle: "테스트제목10",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 11,
-                issueTitle: "테스트제목11",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 12,
-                issueTitle: "테스트제목12",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 13,
-                issueTitle: "테스트제목13",
-                issueCategory: "economy",
-                issueHashtag: "해시태그1,해시태그2",
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 14,
-                issueTitle: "테스트제목14",
-                issueCategory: "politics",
-                issueHashtag: "해시태그3,해시태그4",
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            }
         ]
         setIssues(issueTest);
     }
@@ -317,7 +205,7 @@ const Home = () => {
                     {categoryArray.map(category =>
                         <Route path={`${category.englishName}/`}
                                element={<HomeCategoryScreening
-                                   issues={getCategoryIssue(category.englishName)}
+                                   issues={getCategoryIssue(category.id)}
                                    itemNums={itemNums}
                                    isLoaded={isLoaded}
                                    setTarget={setTarget}

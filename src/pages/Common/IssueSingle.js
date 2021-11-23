@@ -1,8 +1,6 @@
 import React from "react";
 
 const IssueSingle = (props) => {
-    const hashtagArray = props.hashtag.split(",");
-
     return (
         <div className="ISSUESINGLE">
             <div className="issueSingle-date">{props.date}</div>
@@ -10,7 +8,7 @@ const IssueSingle = (props) => {
             <div className="issueSingle-title">{props.title}</div>
             <div className="issueSingle-footer">
                 <div className="issueSingle-hashtag-warp">
-                    {hashtagArray.map(hashtag =>
+                    {(props.hashtag || []).map(hashtag =>
                         <div className="issueSingle-hashtag">{hashtag}</div>
                     )}
                 </div>
