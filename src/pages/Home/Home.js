@@ -266,8 +266,9 @@ const Home = () => {
 
         const previousItemNumsBackup = JSON.parse(window.localStorage.getItem("itemNumsBackup"));
         console.log(`예전 거: ${previousItemNumsBackup}`);
-        window.localStorage.clear();
-        window.localStorage.setItem("itemNumsBackup", JSON.stringify(previousItemNumsBackup + 10));
+        previousItemNumsBackup ?
+            window.localStorage.setItem("itemNumsBackup", JSON.stringify(previousItemNumsBackup + 10)) :
+            window.localStorage.setItem("itemNumsBackup", "20");
         console.log(`함수 내 로컬: ${window.localStorage.getItem("itemNumsBackup")}`);
     }
 
