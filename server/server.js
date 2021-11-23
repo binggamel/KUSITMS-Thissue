@@ -9,6 +9,9 @@ const config = require("./config/key");
 const { auth } = require("./middleware/auth");
 const { User } = require("./model/User");
 
+const cors = require("cors");
+app.use(cors())
+
 //config.mongoURI
 mongoose.connect(config.mongoURI, {
     useNewUrlParser: true,
