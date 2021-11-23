@@ -18,7 +18,7 @@ const IssueCreateTitle = (props) => {
             <div className="issueCreate-step-wrap">
                 <div className="issueCreate-step">✔️</div>
                 <div className="issueCreate-step">✔️</div>
-                <div className="issueCreate-step">3</div>
+                <div className="issueCreate-step">분류</div>
             </div>
             <div className="issueCreate-category-guide">글의 카레고리를 설정해주세요.</div>
             {categoryArray.map(category =>

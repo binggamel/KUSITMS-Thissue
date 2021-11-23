@@ -1,10 +1,14 @@
 
-import React, {useEffect, useState} from "react";
-import {Header} from "../Common";
-import {Route, Routes} from "react-router-dom";
-import {IssueCreateCategory, IssueCreateContents, IssueCreateTitle} from "./components";
-import {postApi} from "../../services/api";
-import '../../styles/IssueCreate.scss';
+import React, { useEffect, useState } from "react";
+import { Header } from "../Common";
+import { Route, Routes } from "react-router-dom";
+import {
+  IssueCreateCategory,
+  IssueCreateContents,
+  IssueCreateTitle,
+} from "./components";
+import { postApi } from "../../services/api";
+import "../../styles/Issue/IssueCreate.scss";
 
 
 const IssueCreate = () => {
@@ -18,7 +22,6 @@ const IssueCreate = () => {
   useEffect(() => {
     setAuthInfo("익명");
   }, [isNextStep]);
-
 
     const createIssue = async (issueTitle, issueContents, issueHashtag, issueCategory, issueAuthor, active) => {
         // await postApi(
@@ -40,6 +43,7 @@ const IssueCreate = () => {
     return (
         <>
             <Header/>
+            <div className="issueCreate-background">
             <div className="issueCreate-pageName">이슈 업!로드</div>
             <button className="issueCreate-temporary"
                     onClick={() => createIssue(
@@ -81,9 +85,9 @@ const IssueCreate = () => {
                            />}/>
                 </Routes>
             </div>
+            </div>
         </>
     )
 }
-
 
 export default IssueCreate;

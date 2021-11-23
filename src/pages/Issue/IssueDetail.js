@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Header} from "../Common";
 import {NavLink} from "react-router-dom";
 import Popup from "reactjs-popup";
+import "../../styles/Issue/IssueDetail.scss";
+
 import {postApi} from "../../services/api";
 import {getCategoryEmoji} from "../../utils/Utils";
 
@@ -79,6 +81,8 @@ const IssueDetail = ({match}) => {
             <Header/>
             {!issue ? <div>로딩중...</div> :
                 <>
+                    <div className="issueDetail-mintbg"></div>
+                    <div className="issueDetail-bg"></div>
                     <div className="issueDetail-left">
                         <div className="issueDetail-hashtag-wrap">
                             {(issue.issueHashtag || []).map(hashtag =>

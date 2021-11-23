@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {categories, Header} from "../Common";
 import {putApi} from "../../services/api";
+import "../../styles/Profile/Profile.scss";
 
 const Profile = () => {
     const categoryArray = categories.slice(1,);
@@ -66,6 +67,11 @@ const Profile = () => {
     return (
         <>
             <Header/>
+            <div className="profile-mine">
+                내프로필
+                <div className="profile-mintbg"></div>
+            </div>
+            
             <div className="profile-left">
                 <div className="profile-photo">{profile.photo}</div>
                 <div className="profile-nickname">
@@ -96,7 +102,9 @@ const Profile = () => {
                         </button>
                     )}
                 </div>
-            </div>
+                </div>
+                
+            
         </>
     )
 }
