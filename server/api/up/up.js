@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Up } = require('../model/Up');
+const { Up } = require('../../model/Up');
 
 router.post('/upNumber', (req, res) => {
     //mongoDB에서 up한 숫자 가져오기
