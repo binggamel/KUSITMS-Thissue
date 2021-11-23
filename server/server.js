@@ -2,19 +2,25 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 
-// const basic = require("./router/index");
-
 const mongoose = require("mongoose");
 require("dotenv").config();
 const { auth } = require("./middleware/auth");
 const { User } = require("./model/User");
 const config = require("./config/key");
+const path = require('path');
 
-//process.env.MONGO_URL
+
+const cors = require("cors");
+app.use(cors())
+
+
 //MONGO_URL=mongodb://localhost/thissue
+//MONGO_URL=mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+
 });
 
 var db = mongoose.connection;
@@ -27,7 +33,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, "public")));
-// app.use("/up", require("./router/up"));
 
 app.get("/", (req, res) => res.send("핫식스 아좌아좌빠이띵~"));
 

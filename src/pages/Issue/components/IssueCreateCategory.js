@@ -5,10 +5,10 @@ import 'reactjs-popup/dist/index.css';
 import {NavLink} from "react-router-dom";
 
 const IssueCreateTitle = (props) => {
-    const categoryArray = categories.slice(1,);
+    const categoryArray = categories;
 
-    const handleCategory = (categoryEnglishName) => {
-        props.setCategory(categoryEnglishName);
+    const handleCategory = (categoryId) => {
+        props.setCategory(categoryId);
         props.setIsNextStep(prev => !prev);
         // console.log(props.category);
     }
@@ -23,7 +23,7 @@ const IssueCreateTitle = (props) => {
             <div className="issueCreate-category-guide">글의 카레고리를 설정해주세요.</div>
             {categoryArray.map(category =>
                 <button className="issueCreate-category"
-                        onClick={() => handleCategory(category.englishName)}>
+                        onClick={() => handleCategory(category.id)}>
                     {category.emoji}{category.koreanName}
                 </button>
             )}
