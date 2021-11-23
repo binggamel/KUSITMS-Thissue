@@ -167,18 +167,18 @@ const update = (req, res) => {
     // console.log(" 랭킹 순위 입력 값 : ");
     console.log(rank2);
     console.log(rank2[0].id);
-    var rank = rank2[0].rank;
-    console.log(" test : " + rank);
+    var test = rank2[0].rank;
+    console.log(" test : " + test);
     RankingIssue.findByIdAndUpdate(
       rank2[0].id,
-      { rank },
+      { test },
       { new: true },
       (err, result) => {
-        // console.log("result");
-        console.log(err);
+        console.log("result");
+        console.log(result);
         if (err) return res.status(500).send("랭킹 업데이트중 오류발생!");
         if (!result) return res.status(404).end("랭킹 업데이트 해당 이슈 없음");
-        res.json(result);
+        // res.json(result);
         // console.log(result);
       }
     );

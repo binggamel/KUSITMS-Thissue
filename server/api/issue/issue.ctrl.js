@@ -1,6 +1,7 @@
 const { Issue } = require("../../model/Issue");
 const { RankingIssue } = require("../../model/Ranking");
 const { User } = require("../../model/User");
+const { auth } = require("../../middleware/auth");
 
 const mongoose = require("mongoose");
 
@@ -51,6 +52,7 @@ const detail = (req, res) => {
 //         배열 추가(201: Created)
 // - 실패 : 값 누락시 (400 : Bad Request)
 const create = (req, res) => {
+  console.log(auth.req.user);
   // ups(업한 유저) 아직 안함!!
   User.findOne({ token: req.cookies.x_auth }, (err, result) => {
     const {
@@ -117,7 +119,7 @@ const createUps = (req, res) => {
   User.findOne({ token: req.cookies.x_auth }, (err, result) => {
     // var _id = result.id;
     var newUps = eval({ user: "", createAt: "" });
-    console.log(newUps);
+    console.log(result);
 
     newUps.user = result.id;
 
@@ -146,7 +148,7 @@ const createUps = (req, res) => {
       { new: true },
       (err, result) => {
         if (err) return res.status(500).send("ups 시 오류가 발생했습니다!");
-        console.log(result);
+        // console.log(result);
         res.status(201).json(result);
       }
     );
