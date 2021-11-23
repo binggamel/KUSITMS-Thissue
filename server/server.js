@@ -10,6 +10,8 @@ const config = require("./config/key");
 const path = require('path');
 
 //MONGO_URL=mongodb://localhost/thissue
+//MONGO_URL=mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

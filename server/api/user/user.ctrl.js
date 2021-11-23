@@ -6,10 +6,10 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 
 const signup = (req, res) => {
-  const { email } = req.body;
-  User.findOne({ email }, (err, result) => {
+  const { name } = req.body;
+  User.findOne({ name }, (err, result) => {
     if (err) return res.status(500).send("회원가입 시 오류가 발생했습니다.");
-    if (result) return res.status(409).send("이미 사용중인 E-mail입니다.");
+    if (result) return res.status(409).send("이미 사용중인 name입니다.");
 
     const user = new User(req.body);
     user.save((err, userInfo) => {
@@ -45,6 +45,7 @@ const login = (req, res) => {
   });
 };
 
+//=================뭔가 이상한=================
 //모든 요청에 대해 token 정합성 체크
 const checkAuth = (req, res, next) => {
   //모든 화면에서 공통으로 보여지는 값이 있는 경우
