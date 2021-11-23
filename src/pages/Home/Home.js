@@ -5,6 +5,7 @@ import {IssueRanking} from "./components";
 import {getApi} from "../../services/api";
 import {NavLink} from "react-router-dom";
 import {getCategoryEmoji} from "../../utils/Utils";
+import "../../styles/Home/home.scss";
 
 
 const Home = () => {
@@ -75,3 +76,5 @@ const Home = () => {
 
 
 export default Home;
+
+//최신순 부분 버튼으로 노노? (누르면 인기순으로 변경) 버튼이 아닌가?

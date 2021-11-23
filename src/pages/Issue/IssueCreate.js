@@ -7,7 +7,7 @@ import {
   IssueCreateTitle,
 } from "./components";
 import { postApi } from "../../services/api";
-import "../../styles/IssueCreate.scss";
+import "../../styles/Issue/IssueCreate.scss";
 
 const IssueCreate = () => {
   const [title, setTitle] = useState("");
@@ -47,6 +47,7 @@ const IssueCreate = () => {
   return (
     <>
       <Header />
+      <div className="issueCreate-background">
       <div className="issueCreate-pageName">이슈 업!로드</div>
       <button
         className="issueCreate-temporary"
@@ -96,6 +97,7 @@ const IssueCreate = () => {
             }
           />
         </Routes>
+      </div>
       </div>
     </>
   );
