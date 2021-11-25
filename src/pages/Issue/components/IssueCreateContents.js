@@ -34,8 +34,8 @@ const IssueCreateContents = (props) => {
         <>
             <div className="issueCreate-step-wrap">
                 <div className="issueCreate-step">✔️</div>
-                <div className="issueCreate-step">2</div>
-                <div className="issueCreate-step">3</div>
+                <div className="issueCreate-step">내용</div>
+                <div className="issueCreate-step">분류</div>
             </div>
             <div className="issueCreate-contents-guide">글의 내용을 작해주세요.</div>
             <div className="issueCreate-contents-hashtag">

@@ -7,7 +7,10 @@ require("dotenv").config();
 const { auth } = require("./middleware/auth");
 const { User } = require("./model/User");
 const config = require("./config/key");
-const path = require('path');
+const path = require("path");
+
+const cors = require("cors");
+app.use(cors());
 
 //MONGO_URL=mongodb://localhost/thissue
 //MONGO_URL=mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
@@ -44,4 +47,10 @@ const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`);
+});
+
+app.all("/*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
 });

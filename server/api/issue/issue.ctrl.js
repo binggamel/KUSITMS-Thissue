@@ -25,6 +25,7 @@ const list = (req, res) => {
     if (err) return res.status(500).end();
     // console.log(result);
     //   res.render("issue/list", { result });
+    res.json(result);
   })
     .limit(limit)
     .sort({ _id: -1 }); //최신순

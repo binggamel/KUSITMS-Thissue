@@ -1,0 +1,163 @@
+@import "../init.scss";
+
+ .profile-mine{
+     /* 내 프로필 */
+    position: absolute;
+    width: 499px;
+    height: 55px;
+    left: -106px;
+    top: 120px;
+    font-family: Sarala;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 65px;
+    text-align: center;
+    color: #000000;
+
+
+    
+    .profile-mintbg{
+    /* Ellipse 117 */
+    position: absolute;
+    width: 2530px;
+    height: 1200px;
+    left: -984px;
+    top: 78px;
+    background: #5DDADB;
+    }
+
+
+}
+
+
+.profile-left{
+    /* Rectangle 336 */
+    z-index: 9999;
+    position: absolute;
+    width: 911px;
+    height: 990px;
+    left: 60px;
+    top: 256px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.profile-photo{
+    /* Rectangle 334 */
+    border-style: dotted;
+    position: absolute;
+    width: 340px;
+    height: 337px;
+    left: 107px;
+    top: 107px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.profile-nickname{
+    /* 닉네임: 앤썬 성별: 여성 나이: 24 */
+    position: absolute;
+    width: 499px;
+    height: 80px;
+    left: 485px;
+    top: 107px;    
+    font-family: Sarala;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 79px;
+    /* or 226% */
+    color: #000000;
+
+    .isNicknamePrivate{
+        /* */
+        position: absolute;
+        width: 120px;
+        height: 40px;
+        left: 212px;
+        top: 21px;
+        font-family: Sarala;
+        
+    }
+}
+
+.profile-gender{
+    
+    position: absolute;
+    width: 499px;
+    height: 80px;
+    left: 485px;
+    top: 177px;    
+    font-family: Sarala;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 79px;
+    /* or 226% */
+    color: #000000;
+
+    .isNicknamePrivate{
+
+        /* */
+        position: absolute;
+        width: 120px;
+        height: 40px;
+        left: 180px;
+        top: 21px;
+        font-family: Sarala;
+    }
+}
+
+.profile-age{
+    
+    position: absolute;
+    width: 499px;
+    height: 80px;
+    left: 485px;
+    top: 247px;    
+    font-family: Sarala;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 79px;
+    /* or 226% */
+    color: #000000;
+
+    .isNicknamePrivate{
+
+        /* */
+        position: absolute;
+        width: 120px;
+        height: 40px;
+        left: 153px;
+        top: 21px;
+        font-family: Sarala;
+    }
+}
+
+.profile-category-wrap{
+    
+    .profile-category{
+        /* Rectangle 372 */
+        position: absolute;
+        width: 166px;  
+        height: 71px;
+        left: 338px;
+        top: 410px;
+        background: #F78EB6;
+        border-radius: 35.5px;
+       
+        /* font*/
+        font-family: Roboto;
+        font-style: normal;
+        // font-weight: bold;
+        font-size: 30px;
+        line-height: 35px;
+        text-align: center;
+        color: #FFFFFF;   
+    }
+}
+
+
+
