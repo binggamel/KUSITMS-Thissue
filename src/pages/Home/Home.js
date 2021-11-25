@@ -6,8 +6,9 @@ import {getApi} from "../../services/api";
 import {NavLink} from "react-router-dom";
 
 import {getCategoryEmoji} from "../../utils/Utils";
+import { HomeCategoryScreening } from "./components";
 import "../../styles/Home/home.scss";
-
+import axios from 'axios';
 
 
 const Home = () => {
@@ -15,11 +16,17 @@ const Home = () => {
     const [issues, setIssues] = useState([]);
     const [target, setTarget] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    // const [itemNums, setItemNums] = useState(window.localStorage.getItem("itemNumsBackup") ? JSON.parse(window.localStorage.getItem("itemNumsBackup")) : 10);
+    //const [itemNums, setItemNums] = useState(window.localStorage.getItem("itemNumsBackup") ? JSON.parse(window.localStorage.getItem("itemNumsBackup")) : 10);
     const [itemNums, setItemNums] = useState(10);
 
-    useEffect(() => {
-        init();
+    // useEffect(() => {
+    //     init();
+    // }, [itemNums]);
+    useEffect(()=>{
+        axios.get('/api').then(response => { 
+            init();
+            console.log(response.data);
+        })
     }, [itemNums]);
 
     const init = async () => {
