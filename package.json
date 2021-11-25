@@ -19,6 +19,7 @@
     "concurrently": "^6.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "http-proxy-middleware": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
@@ -62,5 +63,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000/"
 }

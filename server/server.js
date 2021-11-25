@@ -4,9 +4,7 @@ const cookieParser = require("cookie-parser");
 
 const mongoose = require("mongoose");
 require("dotenv").config();
-const { auth } = require("./middleware/auth");
 const { User } = require("./model/User");
-const config = require("./config/key");
 const path = require('path');
 
 
@@ -16,12 +14,13 @@ app.use(cors())
 
 //MONGO_URL=mongodb://localhost/thissue
 //MONGO_URL=mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-
-mongoose.connect(process.env.MONGO_URL, {
+const FUXX='mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+console.log(process.env.MONGO_URL) //undefined
+mongoose.connect(FUXX, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 
-});
+}).catch(e => {console.log('DB Connection Error: '+e.message);});
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -32,9 +31,8 @@ db.once("open", function () {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => res.send("핫식스 아좌아좌빠이띵~"));
 
 app.use("/api", require("./api"));
 
