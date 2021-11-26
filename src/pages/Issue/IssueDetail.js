@@ -8,22 +8,24 @@ import {postApi} from "../../services/api";
 import {getCategoryEmoji} from "../../utils/Utils";
 import axios from "axios";
 
-const IssueDetail = ({match}) => {
+const IssueDetail = (props) => {
     const [issue, setIssue] = useState({});
     const [issues, setIssues] = useState([]);
     const [authInfo, setAuthInfo] = useState({});
     const [isUped, setIsUped] = useState(false);
+    console.log(props);
 
     useEffect(() => {
         init();
-        console.log(`업 여부: ${isUped}`);
     }, [isUped]);
 
-    useEffect(() => {
-        axios.get('/api/issue').then(response => {
-            setIssues(response.data);
-        })
-    }, [isUped]);
+    // useEffect(() => {
+    //     axios.get(`/api/issue/${match.params.id}`).then(response => {
+    //         // setIssues(response.data);
+    //         console.log(response.data);
+    //         console.log(match);
+    //     })
+    // }, [isUped]);
 
     const init = async () => {
         // const data = await getApi(`issue/${match.params.id}/`);
@@ -35,36 +37,24 @@ const IssueDetail = ({match}) => {
             issueAuthor: "유저",
             issueTitle: "테스트제목1",
             issueContents: "어쩌구 저쩌구 얼레벌레 엄청 길게 적어야겠다 룰룰 랄우라누란러만ㅇ러 만ㅇ러 ㅁ낭",
-            issueCategory: 0,
+            issueCategory: 2,
             issueHashtag: ["해시태그1", "해시태그2"],
             issueDate: "2020-10-20",
             issueModifiedDate: "2021-11-10",
             issueUps: ["사람1", "2", "3", "4", "5", "6", "7"]
         }
-        const user = "3";
-        const issuesTest = [
-            {
-                issueId: 3,
-                issueTitle: "테스트제목1",
-                issueCategory: 0,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 4,
-                issueTitle: "테스트제목2",
-                issueCategory: 3,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-        ]
+
         setIssue(issueTest);
-        setAuthInfo(user);
-        // data.results.issueUps
-        setIsUped((issueTest.issueUps || []).includes(user));
-        setIssues(issuesTest);
+
+        axios.get("/api/issue").then(response => {
+            setIssues(response.data);
+        })
+
+        axios.get("/api/issue/tokenTest/test").then(response => {
+            setAuthInfo(response.data);
+            console.log(response.data)
+            setIsUped((issue.issueUps || []).includes(authInfo));
+        })
     }
 
     const doUp = async () => {
@@ -93,7 +83,9 @@ const IssueDetail = ({match}) => {
                         <div className="issueDetail-left">
                             <div className="issueDetail-hashtag-wrap">
                                 {(issue.issueHashtag || []).map(hashtag =>
-                                    <NavLink to=""><div className="issueDetail-hashtag">#{hashtag}</div></NavLink>)}
+                                    <NavLink to="">
+                                        <div className="issueDetail-hashtag">#{hashtag}</div>
+                                    </NavLink>)}
                             </div>
                             <div className="issueDetail-title">{issue.issueTitle}</div>
                             <div className="issueDetail-contents">{issue.issueContents}</div>
@@ -104,7 +96,7 @@ const IssueDetail = ({match}) => {
                             <div className="issueDetail-bottom">
                                 <div className="issueDetail-bottom-left">
                                     {isUped ?
-                                        <button onClick={() => undoUp()} style={{background: "#5DDADB"}}>🔥</button> :
+                                        <button onClick={() => undoUp()} style={{background: "black"}}>🔥</button> :
                                         <button onClick={() => doUp()}>🔥</button>}
                                     <div className="text">이슈 업!</div>
                                     <div>{(issue.issueUps || []).length}</div>
@@ -114,20 +106,24 @@ const IssueDetail = ({match}) => {
                                         {((issue.issueUps || []).length > 5) ?
                                             <div className="issueDetail-up-wrap">
                                                 <div className="issueDetail-bottom-title">업! 한 사람들</div>
-                                                {(issue.issueUps || []).slice(0, 4).map(up =>
-                                                    <div className="issueDetail-up">{up}</div>)}
-                                                <Popup trigger={<div>+</div>} modal>
-                                                    {close => (
-                                                        <>
-                                                            <div className="close" onClick={() => close()}>X</div>
-                                                            업한 사람들
-                                                            {issue.issueUps.map(up =>
-                                                                <div className="issueDetail-up">{up}</div>)}
-                                                        </>
-                                                    )}
-                                                </Popup>
+                                                <div className="issueDetail-ups">
+                                                    {(issue.issueUps || []).slice(0, 4).map(up =>
+                                                        <div className="issueDetail-up">{up}</div>)}
+                                                    <Popup className="popup-plus" trigger={<div className="plus">+</div>} modal>
+                                                        {close => (
+                                                            <>
+                                                                <div className="close" onClick={() => close()}>✕</div>
+                                                                <div className="popup-title">업한 사람들</div>
+                                                                <div className="popup-up-wrap">
+                                                                {issue.issueUps.map(up =>
+                                                                    <div className="issueDetail-up">{up}</div>)}
+                                                                </div>
+                                                            </>
+                                                        )}
+                                                    </Popup>
+                                                </div>
                                             </div> :
-                                            <div className="issueDetail-up-wrap">
+                                            <div className="issueDetail-ups">
                                                 {(issue.issueUps || []).map(up =>
                                                     <div className="issueDetail-up">{up}</div>)}
                                             </div>
@@ -136,7 +132,7 @@ const IssueDetail = ({match}) => {
                                     </div>
                                     <div className="issueDetailGraph">
                                         <div className="issueDetail-bottom-title">업! 사용자 통계</div>
-                                        그래프가 들어갈 자리입니다.
+                                        30명 이상이 이슈 업! 시 사용자 통계를 확인할 수 있어요.
                                     </div>
                                 </div>
                             </div>
@@ -146,10 +142,18 @@ const IssueDetail = ({match}) => {
                             <div className="issueDetail-right-box">
                                 {getSimilarIssues(issue.issueId, issue.issueCategory).map(similarIssue =>
                                     <NavLink
-                                        to={`/issue/${similarIssue.issueId}`}>{getCategoryEmoji(similarIssue.issueCategory)} {similarIssue.issueTitle}</NavLink>)}
+                                        to={`/issue/${similarIssue.issueId}`}>
+                                        <div className="issueDetail-similar">{getCategoryEmoji(similarIssue.issueCategory)} {similarIssue.issueTitle}</div>
+                                    </NavLink>)}
                             </div>
                             <div className="issueDetail-right-title margin">이런 이슈는 어때요?</div>
-                            <div className="issueDetail-right-box"></div>
+                            <div className="issueDetail-right-box">
+                                {issues.slice(0, 5).map(issue =>
+                                    <NavLink
+                                        to={`/issue/${issue.issueId}`}>
+                                        <div className="issueDetail-similar">{getCategoryEmoji(issue.issueCategory)} {issue.issueTitle}</div>
+                                    </NavLink>)}
+                            </div>
                         </div>
                     </div>
                 </>

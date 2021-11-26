@@ -2,7 +2,7 @@ import React from "react";
 import {Route, Routes} from "react-router-dom";
 import {
     Home,
-    Login, Signup, Find, Callback,
+    Signup, Find, Callback,
     IssueDetail, IssueCreate,
     Profile, ProfileIssueCreated, ProfileIssueDraft, ProfileIssueUp, Withdrawal,
     Search, IssueUpdate,
@@ -13,8 +13,7 @@ const App = () => {
     return (
         <Routes>
             <Route path="/auth/callback/" element={<Callback/>}/>
-            <Route path="/auth/login/" element={<Login/>}/>
-            <Route path="/auth/signup/" element={<Signup/>}/>
+            <Route path="/auth/signup/*" element={<Signup/>}/>
             <Route path="/auth/find/" element={<Find/>}/>
 
             <Route path="/issue/:id/update/" element={<IssueUpdate/>}/>

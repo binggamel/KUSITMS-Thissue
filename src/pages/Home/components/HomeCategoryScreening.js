@@ -4,14 +4,13 @@ import {IssueSingle} from "../../Common";
 import {getCategoryEmoji} from "../../../utils/Utils";
 
 const HomeCategoryScreening = (props) => {
-    console.log(props.issues);
     return (
         <>
             {props.issues && props.issues.slice(0, props.itemNums-1).map(issue =>
-                <NavLink to={`/issue/${issue.issueId}/`} key={issue.issueId}>
+                <NavLink to={`/issue/${issue._id}/`} key={issue._id}>
                     <IssueSingle
-                        key={issue.issueId}
-                        id={issue.issueId}
+                        key={issue._id}
+                        id={issue._id}
                         title={issue.issueTitle}
                         emoji={getCategoryEmoji(issue.issueCategory)}
                         hashtag={issue.issueHashtag}

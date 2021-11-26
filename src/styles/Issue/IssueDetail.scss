@@ -33,7 +33,7 @@
     .issueDetail-hashtag {
       font-size: 14px;
       padding: 10px 15px;
-      background-color: #5DDB6A;
+      background-color: #dddd;
       border-radius: 100px;
       margin-right: 10px;
     }
@@ -61,10 +61,11 @@
   .issueDetail-bottom {
     display: flex;
     justify-content: space-between;
+    margin-top: 100px;
 
     .issueDetail-bottom-left {
       text-align: center;
-      margin-top: 100px;
+      margin-left: 30px;
 
       button {
         width: 100px;
@@ -85,6 +86,61 @@
         margin-top: 10px;
       }
     }
+
+    .issueDetail-bottom-right {
+      width: 500px;
+
+      .issueDetail-bottom-right-header {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .issueDetail-ups {
+        display: flex;
+        margin-bottom: 30px;
+
+        div {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .plus {
+      width: 40px;
+      height: 40px;
+      font-size: 30px;
+      font-weight: bolder;
+      border-radius: 100px;
+      text-align: center;
+      line-height: 40px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .issueDetail-share {
+      width: 100px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      font-size: 18px;
+      font-weight: bolder;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 100px;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .issueDetail-bottom-title {
+      font-weight: bolder;
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -102,6 +158,11 @@
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   .issueDetail-right-title {
@@ -110,7 +171,42 @@
     margin-bottom: 10px;
   }
 
+  .issueDetail-similar {
+    font-size: 18px;
+  }
+
   .margin {
     margin-top: 30px;
+  }
+}
+
+.popup-plus-content {
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+  padding: 20px 30px;
+
+  .close {
+    text-align: right;
+    font-size: 30px;
+    font-weight: lighter;
+    color: rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .popup-title {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  .popup-up-wrap {
+    display: flex;
+  }
+
+  .issueDetail-up {
+    margin: 20px 20px 0 0;
   }
 }

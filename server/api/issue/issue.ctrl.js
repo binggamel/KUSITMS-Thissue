@@ -35,7 +35,7 @@ const list = (req, res) => {
     res.json(result);
   })
     .limit(10)
-    .sort({ _id: 1 }); // -1 최신순, 1 역순
+    .sort({ _id: -1 }); // -1 최신순, 1 역순
 };
 
 //상세조회 (localhost:5000/api/issue/:id)
