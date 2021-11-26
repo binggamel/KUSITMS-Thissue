@@ -1,13 +1,14 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {NavLink} from "react-router-dom";
 import {IssueSingle} from "../../Common";
 import {getCategoryEmoji} from "../../../utils/Utils";
 
 const HomeCategoryScreening = (props) => {
+    console.log(props.issues);
     return (
         <>
-            {props.issues.slice(0, props.itemNums-1).map(issue =>
-                <NavLink to={`/issue/${issue.issueId}/`}>
+            {props.issues && props.issues.slice(0, props.itemNums-1).map(issue =>
+                <NavLink to={`/issue/${issue.issueId}/`} key={issue.issueId}>
                     <IssueSingle
                         key={issue.issueId}
                         id={issue.issueId}
@@ -15,7 +16,7 @@ const HomeCategoryScreening = (props) => {
                         emoji={getCategoryEmoji(issue.issueCategory)}
                         hashtag={issue.issueHashtag}
                         date={issue.issueDate}
-                        upNums={issue.issueUps.length}
+                        upNums={issue.ups.length}
                     />
                 </NavLink>
             )}

@@ -1,128 +1,111 @@
 @import '../init.scss';
 
 
-.header-bar{
-    /* Rectangle 275 */
-    position: absolute;
-    width: 1440px;
-    height: 100px;
-    left: 0px;
-    top: 0px;
+.header {
+  width: 100%;
+  height: 100px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 40px;
+  background-color: white;
+}
+
+.header-bar {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-create {
+    width: 194px;
+    height: 50px;
+    line-height: 50px;
+    background: #F78EB6;
+    border-radius: 25px;
+    text-decoration-line: none;
+
+    font-family: Rajdhani;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .header-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .header-logo-img {
+    width: 56px;
+    height: 74px;
+  }
+
+  .header-logo {
+    font-family: Rajdhani;
+    font-weight: bold;
+    font-size: 35px;
+    color: #5DDADB;
+  }
+
+  .header-search {
+    width: 300px;
+    height: 50px;
+    line-height: 50px;
     background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 20px;
+    box-sizing: border-box;
+    margin: 0 20px;
 
-    .header-bar-create{
-        /* Rectangle 280 */
-        position: absolute;
-        width: 194px;
-        height: 50px;
-        left: 33px;
-        top: 25px;
-        background: #F78EB6;
-        border-radius: 25px;
-        text-decoration-line: none;
-
-        .header-create{
-            /* 이슈 업!로드 */
-            // position: absolute;
-            // width: 134px;
-            // height: 32px;
-            // left: 63px;
-            // top: 37px;
-            position: absolute;
-            width: 150px;
-            height: 32px;
-            left: 20px;
-            top: 8px;
-
-            font-family: Rajdhani;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 25px;
-            line-height: 32px;
-            /* identical to box height */
-            text-align: center;
-            color: #FFFFFF;
-        }
+    .header-search-icon {
+      width: 25px;
+      height: 26px;
     }
 
-    .header-logo-img{
-        /* image 31 */
-        position: absolute;
-        width: 56px;
-        height: 74px;
-        left: 628px;
-        top: 13px;
-    }
-    .header-logo{
-        /* THISSUE */
-        position: absolute;
-        width: 169px;
-        height: 46px;
-        left: 664px;
-        top: 29px;
-        font-family: Rajdhani;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 35px;
-        line-height: 45px;
-        text-align: center;
-        color: #5DDADB;
-    }
+    .header-search-input {
+      border: none;
+      margin-right: 10px;
+      width: 230px;
+      height: 40px;
+      color: black;
 
-    .header-search{
-        /* search 2 */
-        position: absolute;
-        width: 25px;
-        height: 26px;
-        left: 1171px;
-        top: 39px;
+      &:focus {
+        outline: none;
+      }
     }
-    
-    .header-input{
-        /* Rectangle 281 */
-        position: absolute;
-        width: 331px;
-        height: 50px;
-        left: 880px;
-        top: 23px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 50px;
-    }
+  }
 
-    .header-auth{
-        /* Rectangle 277 */
-        position: absolute;
-        width: 157px;
-        height: 50px;
-        left: 1257px;
-        top: 25px;
-        background: #5DDADB;
-        border-radius: 25px;
+  .header-auth {
+    width: 157px;
+    height: 50px;
+    background: #5DDADB;
+    border-radius: 25px;
 
-        // .header-mypage{
-        //     position: absolute;
-        //     font-family: Rajdhani;
-        //     font-style: normal;
-        //     font-weight: bold;
-        //     font-size: 15px;
-        //     line-height: 38px;
-        //     text-align: center;
-        //     color: #FFFFFF;
-        // }
+    // .header-mypage{
+    //     position: absolute;
+    //     font-family: Rajdhani;
+    //     font-style: normal;
+    //     font-weight: bold;
+    //     font-size: 15px;
+    //     line-height: 38px;
+    //     text-align: center;
+    //     color: #FFFFFF;
+    // }
 
-        // .header-logout{
-        //     position: absolute;
-        //     font-family: Rajdhani;
-        //     font-style: normal;
-        //     font-weight: bold;
-        //     font-size: 15px;
-        //     line-height: 20px;
-        //     color: #FFFFFF;
-        // }
-    }
-
+    // .header-logout{
+    //     position: absolute;
+    //     font-family: Rajdhani;
+    //     font-style: normal;
+    //     font-weight: bold;
+    //     font-size: 15px;
+    //     line-height: 20px;
+    //     color: #FFFFFF;
+    // }
+  }
 
 
 }
