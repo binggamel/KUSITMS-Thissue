@@ -9,3 +9,13 @@ a {
   text-decoration-line: none;
   color: black;
 }
+
+button {
+  border: none;
+  outline: none;
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
