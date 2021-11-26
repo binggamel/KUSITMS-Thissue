@@ -18,16 +18,16 @@
   align-items: center;
 
   .header-create {
-    width: 194px;
+    width: 160px;
     height: 50px;
-    line-height: 50px;
+    line-height: 53px;
     background: #F78EB6;
     border-radius: 25px;
     text-decoration-line: none;
 
     font-family: Rajdhani;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 22px;
     text-align: center;
     color: #FFFFFF;
   }
@@ -59,7 +59,7 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding-left: 20px;
     box-sizing: border-box;
-    margin: 0 20px;
+    margin: 0 20px 0 40px;
 
     .header-search-icon {
       width: 25px;
@@ -84,29 +84,16 @@
     height: 50px;
     background: #5DDADB;
     border-radius: 25px;
+    line-height: 53px;
+    text-align: center;
 
-    // .header-mypage{
-    //     position: absolute;
-    //     font-family: Rajdhani;
-    //     font-style: normal;
-    //     font-weight: bold;
-    //     font-size: 15px;
-    //     line-height: 38px;
-    //     text-align: center;
-    //     color: #FFFFFF;
-    // }
+    font-size: 22px;
+    color: white;
+    font-weight: bolder;
 
-    // .header-logout{
-    //     position: absolute;
-    //     font-family: Rajdhani;
-    //     font-style: normal;
-    //     font-weight: bold;
-    //     font-size: 15px;
-    //     line-height: 20px;
-    //     color: #FFFFFF;
-    // }
+    &:hover {
+      cursor: pointer;
+    }
   }
-
-
 }
 

@@ -1,6 +1,5 @@
 export { default as Home } from "./Home/Home";
 
-export { default as Login } from "./Auth/Login";
 export { default as Signup } from "./Auth/Signup";
 export { default as Callback } from "./Auth/Callback";
 export { default as Find } from "./Auth/Find";

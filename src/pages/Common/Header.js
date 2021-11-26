@@ -5,6 +5,8 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import "../../styles/Common/header.scss";
 import logo from "../../styles/img/logo.jpg";
 import axios from "axios";
+import Popup from "reactjs-popup";
+import {PopupLogin} from "./index";
 
 const Header = () => {
     const [authInfo, setAuthInfo] = useState([])
@@ -29,12 +31,12 @@ const Header = () => {
                         <input type="text" className="header-search-input"/>
                         <NavLink to="/search/" className="header-search-icon"><FontAwesomeIcon icon={faSearch}/></NavLink>
                     </div>
-                    {authInfo ?
+                    {!authInfo ?
                     <div className="header-auth">
-                        <NavLink to="/profile/test/" className="header-mypage">마이페이지</NavLink>
-                        <button className="header-logout">로그아웃</button>
+                        <NavLink to="/profile/test/" style={{color: "white"}}>마이페이지</NavLink>
+                        {/*<button className="header-logout">로그아웃</button>*/}
                     </div> :
-                       <div className="header-auth">로그인</div>}
+                        <PopupLogin trigger={<div className="header-auth">로그인</div>}/>}
                 </div>
             </div>
         </div>

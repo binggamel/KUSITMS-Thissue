@@ -15,11 +15,12 @@ const Home = () => {
   const [target, setTarget] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   //const [itemNums, setItemNums] = useState(window.localStorage.getItem("itemNumsBackup") ? JSON.parse(window.localStorage.getItem("itemNumsBackup")) : 10);
-  const [itemNums, setItemNums] = useState(10);
+  const [itemNums, setItemNums] = useState(12);
 
     useEffect(() => {
         axios.get("/api/issue").then(response => {
             setIssues(response.data);
+            console.log(response.data);
         })
     }, [itemNums]);
 
@@ -30,7 +31,7 @@ const Home = () => {
   const getMoreItem = async () => {
     setIsLoaded(true);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    setItemNums((prev) => prev + 10);
+    setItemNums((prev) => prev + 12);
     setIsLoaded(false);
 
         // const previousItemNumsBackup = JSON.parse(window.localStorage.getItem("itemNumsBackup"));
