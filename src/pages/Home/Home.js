@@ -24,8 +24,6 @@ const Home = () => {
     useEffect(() => {
         axios.get('/api/issue').then(response => {
             setIssues(response.data);
-            // console.log(response.data);
-            // console.log(`이슈: ${issues}`);
         })
     }, [itemNums]);
 
