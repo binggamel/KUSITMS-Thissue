@@ -12,8 +12,8 @@ app.use(cors());
 
 //MONGO_URL=mongodb://localhost/thissue
 //MONGO_URL=mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-const FUXX = "mongodb://localhost/thissue";
-// "mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const FUXX =
+  "mongodb+srv://root:root1234@thissue.oomvy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 console.log(process.env.MONGO_URL); //undefined
 mongoose
