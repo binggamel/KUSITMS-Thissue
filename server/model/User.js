@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
 const bcrypt = require("bcrypt");
 const saltRounds = 10; //salt의 길이
 const jwt = require("jsonwebtoken");
@@ -34,6 +36,32 @@ const userSchema = mongoose.Schema({
     required: true,
   },
   image: String,
+  createdIssue: [
+    {
+      issueId: {
+        type: Schema.Types.ObjectId,
+        ref: "Issue",
+        required: true,
+      },
+      active: {
+        type: Number,
+        require: true,
+      },
+    },
+  ],
+
+  upsIssue: [
+    {
+      issueId: {
+        type: Schema.Types.ObjectId,
+        ref: "Issue",
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+      },
+    },
+  ],
   token: {
     //유효성 관리
     type: String,
