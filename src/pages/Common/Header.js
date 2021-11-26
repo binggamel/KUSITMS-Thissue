@@ -1,11 +1,20 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import "../../styles/Common/header.scss";
 import logo from "../../styles/img/logo.jpg";
+import axios from "axios";
 
 const Header = () => {
+    const [authInfo, setAuthInfo] = useState([])
+
+    useEffect(() => {
+        axios.get("/api/issue/tokenTest/test").then(response => {
+            setAuthInfo(response.data);
+        })
+    })
+
     return (
         <div className="header">
             <div className="header-bar">
@@ -20,10 +29,12 @@ const Header = () => {
                         <input type="text" className="header-search-input"/>
                         <NavLink to="/search/" className="header-search-icon"><FontAwesomeIcon icon={faSearch}/></NavLink>
                     </div>
+                    {authInfo ?
                     <div className="header-auth">
                         <NavLink to="/profile/test/" className="header-mypage">마이페이지</NavLink>
                         <button className="header-logout">로그아웃</button>
-                    </div>
+                    </div> :
+                       <div className="header-auth">로그인</div>}
                 </div>
             </div>
         </div>

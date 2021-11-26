@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { categories, Header } from "../Common";
 import { IssueRanking } from "./components";
-import { getApi } from "../../services/api";
 import { NavLink } from "react-router-dom";
 
 import {HomeCategoryScreening} from "./components";
@@ -12,96 +11,20 @@ import axios from "axios";
 const Home = () => {
   const categoryArray = categories;
   const [issues, setIssues] = useState([]);
+  const [authInfo, setAuthInfo] = useState([]);
   const [target, setTarget] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   //const [itemNums, setItemNums] = useState(window.localStorage.getItem("itemNumsBackup") ? JSON.parse(window.localStorage.getItem("itemNumsBackup")) : 10);
   const [itemNums, setItemNums] = useState(10);
 
-
-    // useEffect(() => {
-    //     init();
-    // }, [itemNums]);
     useEffect(() => {
-        axios.get('/api/issue').then(response => {
+        axios.get("/api/issue").then(response => {
             setIssues(response.data);
         })
     }, [itemNums]);
 
-    // const init = async () => {
-    //     // const data = await getApi("issue/");
-    //     // setIssues(data.results);
-    //
-    //     const issueTest = [
-    //         {
-    //             issueId: 1,
-    //             issueTitle: "테스트제목1",
-    //             issueCategory: 0,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-20",
-    //             ups: ["사람1"]
-    //         },
-    //         {
-    //             issueId: 2,
-    //             issueTitle: "테스트제목2",
-    //             issueCategory: 3,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-25",
-    //             ups: ["사람1", "사람2"]
-    //         },
-    //         {
-    //             issueId: 3,
-    //             issueTitle: "테스트제목3",
-    //             issueCategory: 2,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-20",
-    //             ups: ["사람1"]
-    //         },
-    //         {
-    //             issueId: 4,
-    //             issueTitle: "테스트제목4",
-    //             issueCategory: 1,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-25",
-    //             ups: ["사람1", "사람2"]
-    //         },
-    //         {
-    //             issueId: 5,
-    //             issueTitle: "테스트제목5",
-    //             issueCategory: 0,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-20",
-    //             ups: ["사람1"]
-    //         },
-    //         {
-    //             issueId: 6,
-    //             issueTitle: "테스트제목6",
-    //             issueCategory: 2,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-25",
-    //             ups: ["사람1", "사람2"]
-    //         },
-    //         {
-    //             issueId: 7,
-    //             issueTitle: "테스트제목7",
-    //             issueCategory: 3,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-20",
-    //             ups: ["사람1"]
-    //         },
-    //         {
-    //             issueId: 8,
-    //             issueTitle: "테스트제목8",
-    //             issueCategory: 11,
-    //             issueHashtag: ["해시태그3", "해시태그4"],
-    //             issueDate: "2020-10-25",
-    //             ups: ["사람1", "사람2"]
-    //         },
-    //     ]
-    //     setIssues(issueTest);
-    // }
-
   const getCategoryIssue = (category) => {
-    // return issues.filter((issue) => issue.issueCategory === category);
+    return issues.filter((issue) => issue.issueCategory === category);
   };
 
   const getMoreItem = async () => {
