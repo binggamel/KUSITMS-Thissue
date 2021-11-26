@@ -5,7 +5,6 @@ import {IssueRanking} from "./components";
 import {getApi} from "../../services/api";
 import {NavLink} from "react-router-dom";
 
-import {getCategoryEmoji} from "../../utils/Utils";
 import {HomeCategoryScreening} from "./components";
 import "../../styles/Home/home.scss";
 import axios from 'axios';
@@ -141,7 +140,7 @@ const Home = () => {
     return (
         <>
             <Header/>
-            <div className="home">
+            <div className="home-white">
                 <div className="home-title">실시간 이슈 랭킹</div>
                 <IssueRanking/>
                 <div className="home-sort-wrap">
@@ -159,6 +158,8 @@ const Home = () => {
                         </NavLink>
                     )}
                 </div>
+            </div>
+            <div className="home-blue">
                 <div className="home-issue-wrap">
                     <Routes>
                         <Route path="/"

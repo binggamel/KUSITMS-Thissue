@@ -1,0 +1,58 @@
+@import '../init.scss';
+
+.ISSUESINGLE {
+  width: 380px;
+  height: 200px;
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2) ;
+}
+
+.issueSingle-date {
+  font-size: 14px;
+  text-align: right;
+}
+
+.issueSingle-icon {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.issueSingle-title {
+  font-size: 22px;
+  font-weight: bolder;
+}
+
+.issueSingle-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 13px;
+
+  .issueSingle-hashtag-warp {
+    display: flex;
+    margin-bottom: 10px;
+
+    .issueSingle-hashtag {
+      padding: 10px 15px;
+      text-align: center;
+      background-color: #F78EB6;
+      margin-right: 10px;
+      border-radius: 100px;
+      color: white;
+      font-size: 16px;
+    }
+  }
+
+  .issueSingle-up {
+    text-align: center;
+
+    .issueSingle-up-icon {
+      font-size: 40px;
+    }
+    .issueSingle-up-nums {
+      font-size: 16px;
+    }
+  }
+}
