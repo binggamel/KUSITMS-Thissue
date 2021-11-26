@@ -9,7 +9,7 @@ const IssueSingle = (props) => {
             <div className="issueSingle-footer">
                 <div className="issueSingle-hashtag-warp">
                     {(props.hashtag || []).map(hashtag =>
-                        <div className="issueSingle-hashtag">{hashtag}</div>
+                        <div className="issueSingle-hashtag">{hashtag.hashtag}</div>
                     )}
                 </div>
                 <div className="issueSingle-upNums">{props.upNums}</div>

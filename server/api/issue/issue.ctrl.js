@@ -23,9 +23,10 @@ const list = (req, res) => {
   Issue.find((err, result) => {
     if (err) return res.status(500).end();
     // console.log(result);
+    res.json(result);
     //   res.render("issue/list", { result });
   })
-    .limit(limit)
+    .limit(10)
     .sort({ _id: -1 }); //최신순
 };
 

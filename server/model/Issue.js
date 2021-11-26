@@ -19,32 +19,14 @@ const issueSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  issueHashtag: {
-    _1: {
-      type: String,
-      default: "",
+  issueHashtag: [
+    {
+      hashtag: {
+        type: String,
+        default: "",
+      },
     },
-
-    _2: {
-      type: String,
-      default: "",
-    },
-
-    _3: {
-      type: String,
-      default: "",
-    },
-
-    _4: {
-      type: String,
-      default: "",
-    },
-
-    _5: {
-      type: String,
-      default: "",
-    },
-  },
+  ],
 
   issueCategory: {
     required: true,

@@ -6,7 +6,7 @@ import {getApi} from "../../services/api";
 import {NavLink} from "react-router-dom";
 
 import {getCategoryEmoji} from "../../utils/Utils";
-import { HomeCategoryScreening } from "./components";
+import {HomeCategoryScreening} from "./components";
 import "../../styles/Home/home.scss";
 import axios from 'axios';
 
@@ -22,133 +22,86 @@ const Home = () => {
     // useEffect(() => {
     //     init();
     // }, [itemNums]);
-    useEffect(()=>{
-        axios.get('/api').then(response => { 
-            init();
-            console.log(response.data);
+    useEffect(() => {
+        axios.get('/api/issue').then(response => {
+            setIssues(response.data);
+            // console.log(response.data);
+            // console.log(`이슈: ${issues}`);
         })
     }, [itemNums]);
 
-    const init = async () => {
-        // const data = await getApi("issue/");
-        // setIssues(data.results);
-
-        const issueTest = [
-            {
-                issueId: 1,
-                issueTitle: "테스트제목1",
-                issueCategory: 0,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 2,
-                issueTitle: "테스트제목2",
-                issueCategory: 3,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 3,
-                issueTitle: "테스트제목3",
-                issueCategory: 2,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 4,
-                issueTitle: "테스트제목4",
-                issueCategory: 1,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 5,
-                issueTitle: "테스트제목5",
-                issueCategory: 0,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 6,
-                issueTitle: "테스트제목6",
-                issueCategory: 2,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 7,
-                issueTitle: "테스트제목7",
-                issueCategory: 3,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 8,
-                issueTitle: "테스트제목8",
-                issueCategory: 11,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 9,
-                issueTitle: "테스트제목9",
-                issueCategory: 12,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 10,
-                issueTitle: "테스트제목10",
-                issueCategory: 13,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 11,
-                issueTitle: "테스트제목11",
-                issueCategory: 13,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 12,
-                issueTitle: "테스트제목12",
-                issueCategory: 11,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-            {
-                issueId: 13,
-                issueTitle: "테스트제목13",
-                issueCategory: 7,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-20",
-                issueUps: ["사람1"]
-            },
-            {
-                issueId: 14,
-                issueTitle: "테스트제목14",
-                issueCategory: 6,
-                issueHashtag: ["해시태그3", "해시태그4"],
-                issueDate: "2020-10-25",
-                issueUps: ["사람1", "사람2"]
-            },
-        ]
-        setIssues(issueTest);
-    }
+    // const init = async () => {
+    //     // const data = await getApi("issue/");
+    //     // setIssues(data.results);
+    //
+    //     const issueTest = [
+    //         {
+    //             issueId: 1,
+    //             issueTitle: "테스트제목1",
+    //             issueCategory: 0,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-20",
+    //             ups: ["사람1"]
+    //         },
+    //         {
+    //             issueId: 2,
+    //             issueTitle: "테스트제목2",
+    //             issueCategory: 3,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-25",
+    //             ups: ["사람1", "사람2"]
+    //         },
+    //         {
+    //             issueId: 3,
+    //             issueTitle: "테스트제목3",
+    //             issueCategory: 2,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-20",
+    //             ups: ["사람1"]
+    //         },
+    //         {
+    //             issueId: 4,
+    //             issueTitle: "테스트제목4",
+    //             issueCategory: 1,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-25",
+    //             ups: ["사람1", "사람2"]
+    //         },
+    //         {
+    //             issueId: 5,
+    //             issueTitle: "테스트제목5",
+    //             issueCategory: 0,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-20",
+    //             ups: ["사람1"]
+    //         },
+    //         {
+    //             issueId: 6,
+    //             issueTitle: "테스트제목6",
+    //             issueCategory: 2,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-25",
+    //             ups: ["사람1", "사람2"]
+    //         },
+    //         {
+    //             issueId: 7,
+    //             issueTitle: "테스트제목7",
+    //             issueCategory: 3,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-20",
+    //             ups: ["사람1"]
+    //         },
+    //         {
+    //             issueId: 8,
+    //             issueTitle: "테스트제목8",
+    //             issueCategory: 11,
+    //             issueHashtag: ["해시태그3", "해시태그4"],
+    //             issueDate: "2020-10-25",
+    //             ups: ["사람1", "사람2"]
+    //         },
+    //     ]
+    //     setIssues(issueTest);
+    // }
 
     const getCategoryIssue = (category) => {
         return issues.filter(issue => issue.issueCategory === category);
@@ -161,11 +114,9 @@ const Home = () => {
         setIsLoaded(false);
 
         // const previousItemNumsBackup = JSON.parse(window.localStorage.getItem("itemNumsBackup"));
-        // console.log(`예전 거: ${previousItemNumsBackup}`);
         // previousItemNumsBackup ?
         //     window.localStorage.setItem("itemNumsBackup", JSON.stringify(previousItemNumsBackup + 10)) :
         //     window.localStorage.setItem("itemNumsBackup", "20");
-        // console.log(`함수 내 로컬: ${window.localStorage.getItem("itemNumsBackup")}`);
     }
 
     const onIntersect = async ([entry], observer) => {
@@ -182,7 +133,7 @@ const Home = () => {
             observer = new IntersectionObserver(onIntersect, {
                 threshold: 0.5,
             });
-            observer.observe(target);
+            observer.obseve(target);
         }
         return () => observer && observer.disconnect();
     }, [target]);
@@ -190,38 +141,45 @@ const Home = () => {
     return (
         <>
             <Header/>
-            <IssueRanking/>
-            <div className="home-category-wrap">
-                <NavLink to="/" className="home-category">전체</NavLink>
-                {categoryArray.map(category =>
-                    <NavLink to={`/${category.englishName}/`}
-                             className="home-category">
-                        {category.emoji}{category.koreanName}
+            <div className="home">
+                <div className="home-title">실시간 이슈 랭킹</div>
+                <IssueRanking/>
+                <div className="home-sort-wrap">
+                    <div className="home-title">카테고리별 이슈 모아보기</div>
+                    <div className="home-sort">⏰최신순</div>
+                </div>
+                <div className="home-category-wrap">
+                    <NavLink to="/">
+                        <div className="home-category">전체</div>
                     </NavLink>
-                )}
-            </div>
-            <div className="home-sort-wrap">
-                <div className="home-sort">⏰최신순</div>
-            </div>
-            <div className="home-issue-wrap">
-                <Routes>
-                    <Route path="/"
-                           element={<HomeCategoryScreening
-                               issues={issues}
-                               itemNums={itemNums}
-                               isLoaded={isLoaded}
-                               setTarget={setTarget}
-                           />}/>
                     {categoryArray.map(category =>
-                        <Route path={`${category.englishName}/`}
+                        <NavLink to={`/${category.englishName}/`}
+                                 key={category.id}>
+                            <div className="home-category">{category.emoji} {category.koreanName}</div>
+                        </NavLink>
+                    )}
+                </div>
+                <div className="home-issue-wrap">
+                    <Routes>
+                        <Route path="/"
                                element={<HomeCategoryScreening
-                                   issues={getCategoryIssue(category.id)}
+                                   issues={issues}
                                    itemNums={itemNums}
                                    isLoaded={isLoaded}
                                    setTarget={setTarget}
                                />}/>
-                    )}
-                </Routes>
+                        {categoryArray.map(category =>
+                            <Route path={`${category.englishName}/`}
+                                   key={category.id}
+                                   element={<HomeCategoryScreening
+                                       issues={getCategoryIssue(category.id)}
+                                       itemNums={itemNums}
+                                       isLoaded={isLoaded}
+                                       setTarget={setTarget}
+                                   />}/>
+                        )}
+                    </Routes>
+                </div>
             </div>
         </>
     )

@@ -13,8 +13,8 @@ export const getApi = async (url) => {
         // const headers = token ? {Authorization: `Bearer ${token}`}: null;
 
         // token 받고 아래 headers 코드는 삭제
-        const headers = null;
-        const response = await api.get(url, {headers});
+        // const headers = null;
+        const response = await api.get(url);
         return response.data;
     } catch (err) {
         console.log(err);
