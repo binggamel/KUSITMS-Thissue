@@ -9,5 +9,6 @@ router.use("/user", require("./user"));
 router.use("/ranking", require("./ranking"));
 router.use("/up", require("./up/up"));
 router.use("/email", require("./email/email"));
+router.use("/search", require("./search"));
 
 module.exports = router;

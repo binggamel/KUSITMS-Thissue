@@ -26,4 +26,11 @@ router.delete("/:id", ctrl.checkId, ctrl.remove);
 router.post("/:id/ups", ctrl.createUps);
 router.delete("/:id/ups/:upId", ctrl.removeUps);
 
+//유저 마이페이지
+router.get("/mypage/ups", ctrl.myPageUps); //ups한 이슈 리스트
+router.get("/mypage/issue", ctrl.myPageIssue); //올린 issue리스트
+
+//유저 로그인 test
+router.get("/tokenTest/test", ctrl.tokenTest);
+
 module.exports = router;

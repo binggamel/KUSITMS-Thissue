@@ -15,8 +15,16 @@ const checkId = (req, res, next) => {
   next();
 };
 
+const tokenTest = (req, res) => {
+  User.findOne({ token: req.cookies.x_auth }, (err, result) => {
+    console.log(result);
+    res.json(result);
+  });
+};
+
 //목록 조회
 const list = (req, res) => {
+  console.log(req.query);
   const limit = parseInt(req.query.limit || 10, 10);
   if (Number.isNaN(limit)) return res.status(400).end();
   // console.log("list 조회 : " + req.params.id);
@@ -24,11 +32,10 @@ const list = (req, res) => {
   Issue.find((err, result) => {
     if (err) return res.status(500).end();
     // console.log(result);
-    //   res.render("issue/list", { result });
     res.json(result);
   })
-    .limit(limit)
-    .sort({ _id: -1 }); //최신순
+    .limit(10)
+    .sort({ _id: 1 }); // -1 최신순, 1 역순
 };
 
 //상세조회 (localhost:5000/api/issue/:id)
@@ -44,8 +51,24 @@ const detail = (req, res) => {
     // 참고 : https://ip99202.github.io/posts/nodejs-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EC%A1%B0%ED%9A%8C%EC%88%98-%EA%B5%AC%ED%98%84/
     result.issueViewCnt++;
     result.save();
+    console.log("조회수 + 1");
+    res.json(result);
     // res.render("issue/detail", { result });
   }).populate(["ups.user"]);
+};
+
+const myPageUps = (req, res) => {
+  User.findOne({ token: req.cookies.x_auth }, (err, result) => {
+    console.log(result.upsIssue);
+    res.json(result.upsIssue);
+  });
+};
+
+const myPageIssue = (req, res) => {
+  User.findOne({ token: req.cookies.x_auth }, (err, result) => {
+    console.log(result.createdIssue);
+    res.json(result.createdIssue);
+  });
 };
 
 //등록 (POST localhost:5000/api/issue)
@@ -53,11 +76,8 @@ const detail = (req, res) => {
 //         배열 추가(201: Created)
 // - 실패 : 값 누락시 (400 : Bad Request)
 const create = (req, res) => {
-  console.log(auth.req.user);
-  // ups(업한 유저) 아직 안함!!
   User.findOne({ token: req.cookies.x_auth }, (err, result) => {
     const {
-      // issueId,
       issueTitle,
       issueContents,
       issueHashtag,
@@ -84,13 +104,10 @@ const create = (req, res) => {
 
     const issueDate = getCurrentDate();
     const issueModifiedDate = getCurrentDate();
-    //   필수 data 누락시 오류 처리 (400 : Bad Request)
     if (!issueTitle || !issueContents) return res.status(400).end();
 
-    //   id(db에서 자동 부여되는)값 자동 채번
     Issue.create(
       {
-        //   issueId,
         issueTitle,
         issueContents,
         issueHashtag,
@@ -105,9 +122,27 @@ const create = (req, res) => {
         if (err) return res.status(500).end();
         res.status(201).json(result);
         const id = result.id;
+        const active = result.active;
         RankingIssue.create({ id }, (err, result) => {
           if (err) return res.status(500).send("랭킹 업로드 시 오류 발생");
         });
+
+        var newCreatedIssue = eval({ issueId: "", active: "" });
+        newCreatedIssue.issueId = id;
+        newCreatedIssue.active = active;
+        console.log(newCreatedIssue);
+
+        User.findByIdAndUpdate(
+          _id,
+          { $push: { createdIssue: [newCreatedIssue] } },
+          { new: true },
+          (err, result) => {
+            if (err)
+              return res
+                .status(500)
+                .send("사용자 createdIssue에 추가하던 중 오류가 발생했습니다!");
+          }
+        );
       }
     );
   });
@@ -115,14 +150,18 @@ const create = (req, res) => {
 
 //ups생성 (post localhost:5000/api/issue/:id/ups)
 // ups 유저값 추가
+// 유저스키마에도 넣기
 // req.cookies.x_auth
 const createUps = (req, res) => {
   User.findOne({ token: req.cookies.x_auth }, (err, result) => {
-    // var _id = result.id;
     var newUps = eval({ user: "", createAt: "" });
+    var newUpsList = eval({ issueId: "", createdAt: "" });
+    var issueId = req.params.id;
+
     console.log(result);
 
     newUps.user = result.id;
+    newUpsList.issueId = issueId;
 
     console.log(newUps.user);
     //=================한국시간 처리=================
@@ -138,10 +177,11 @@ const createUps = (req, res) => {
     }
 
     newUps.createAt = getCurrentDate();
+    newUpsList.createdAt = getCurrentDate();
 
     console.log(newUps);
+    console.log(newUpsList);
 
-    var issueId = req.params.id;
     //{ $push: { ups: { newUps } } },
     Issue.findByIdAndUpdate(
       issueId,
@@ -149,8 +189,20 @@ const createUps = (req, res) => {
       { new: true },
       (err, result) => {
         if (err) return res.status(500).send("ups 시 오류가 발생했습니다!");
-        // console.log(result);
+
         res.status(201).json(result);
+      }
+    );
+
+    User.findByIdAndUpdate(
+      result.id,
+      { $push: { upsIssue: [newUpsList] } },
+      { new: true },
+      (err, result) => {
+        if (err)
+          return res
+            .status(500)
+            .send("사용자 upsList에 추가하던 중 오류가 발생했습니다!");
       }
     );
   });
@@ -209,11 +261,24 @@ const update = (req, res) => {
 const remove = (req, res) => {
   const id = req.params.id;
 
-  //id에 해당하는 Document를 찾아ㅏ서 DB에서 삭제
+  //id에 해당하는 Document를 찾아서 DB에서 삭제
   Issue.findByIdAndDelete(id, (err, result) => {
     if (err) return res.status(500).send("삭제 시 오류가 발생했습니다!");
     if (!result) return res.status(404).send("해당하는 정보가 없습니다.");
     res.json(result);
+
+    User.findOne({ token: req.cookies.x_auth }, (err, result) => {
+      var userId = result.id;
+      User.findByIdAndUpdate(
+        userId,
+        { $pull: { createdIssue: { issueId: id } } },
+        { new: true },
+        (err, result) => {
+          if (err) return res.status(500).send("수정 시 오류가 발생했습니다!");
+          if (!result) return res.status(404).end("해당하는 정보가 없습니다!");
+        }
+      );
+    });
   });
 
   RankingIssue.findOneAndDelete({ id: id }, (err, result) => {
@@ -222,11 +287,11 @@ const remove = (req, res) => {
   });
 };
 
+//delete (DELETE localhost:5000/api/issue/:id/ups/:upId)
 const removeUps = (req, res) => {
   const issueId = req.params.id;
   const upId = req.params.upId;
 
-  //{ $push: { ups: [newUps] } }
   Issue.findByIdAndUpdate(
     issueId,
     {
@@ -239,33 +304,30 @@ const removeUps = (req, res) => {
       res.json(result);
     }
   );
-};
-
-//페이지 뿌리는 부분
-
-const showCreatePage = (req, res) => {
-  //   res.render("issue/create");
-};
-
-const showUpdatePage = (req, res) => {
-  const id = req.params.id;
-
-  Issue.findById(id, (err, result) => {
-    if (err) return res.status(500).end();
-    if (!result) return res.status(404).end();
-    // res.render("issue/update", { result });
+  User.findOne({ token: req.cookies.x_auth }, (err, result) => {
+    var userId = result.id;
+    User.findByIdAndUpdate(
+      userId,
+      { $pull: { upsIssue: { issueId: issueId } } },
+      { new: true },
+      (err, result) => {
+        if (err) return res.status(500).send("수정 시 오류가 발생했습니다!");
+        if (!result) return res.status(404).end("해당하는 정보가 없습니다!");
+      }
+    );
   });
 };
 
 module.exports = {
+  tokenTest,
   list,
   detail,
+  myPageUps,
+  myPageIssue,
   create,
   update,
   createUps,
   remove,
   removeUps,
   checkId,
-  showCreatePage,
-  showUpdatePage,
 };
